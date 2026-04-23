@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Voxora AI Solutions — Industry-specific Voice AI agents for Healthcare, Real Estate, E-commerce, Professional Services, and Insurance."/>
+<title>Solutions — Voxora AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63'},accent:{400:'#818cf8',500:'#6366f1',600:'#4f46e5'}}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.dark body{background:#0a0e27;color:#e2e8f0}
+::selection{background:rgba(6,182,212,0.3)}
+.glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}
+.glass-card{background:rgba(15,23,42,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem;transition:all .3s ease}
+.glass-card:hover{border-color:rgba(6,182,212,0.3);transform:translateY(-2px)}
+.gradient-text{background:linear-gradient(135deg,#06b6d4,#6366f1,#06b6d4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.animate-fade-up{animation:fade-up .6s ease both}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2)}50%{box-shadow:0 0 40px rgba(6,182,212,0.4)}}
+.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}
+:focus-visible{outline:2px solid #06b6d4;outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.3);border-radius:4px}
+.tab-active{border-color:#06b6d4;color:#06b6d4;background:rgba(6,182,212,0.1)}
+</style>
+</head>
+<body class="dark:bg-[#0a0e27] bg-slate-50 dark:text-slate-200 text-slate-800 font-sans">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:z-[9999] focus:bg-brand-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 glass shadow-lg" role="navigation" aria-label="Main navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 lg:h-20">
+<a href="index.html" class="flex items-center gap-2" aria-label="Voxora AI Home">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center animate-pulse-glow">
+<svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="text-xl font-bold gradient-text">Voxora AI</span>
+</a>
+<div class="hidden lg:flex items-center gap-1">
+<a href="solutions.html" class="px-3 py-2 text-sm font-medium text-brand-400 border-b-2 border-brand-400 rounded-none">Solutions</a>
+<a href="features.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Features</a>
+<a href="how-it-works.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">How It Works</a>
+<a href="ethics.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Ethics &amp; Bias</a>
+<a href="security.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Security</a>
+<a href="pricing.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Pricing</a>
+<a href="resources.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Resources</a>
+</div>
+<div class="flex items-center gap-2">
+<a href="demo.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300">Book Secure Demo</a>
+<a href="login.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl border dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all">Login</a>
+</div>
+</div>
+</div>
+</nav>
+
+<main id="main-content" class="pt-24 lg:pt-32">
+<!-- Hero -->
+<section class="py-16 lg:py-24 relative">
+<div class="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#0f1740] to-[#0a0e27]"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Industry Solutions</span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 animate-fade-up">
+<span class="gradient-text">Voice AI Tailored to Your Industry</span>
+</h1>
+<p class="text-lg dark:text-slate-400 text-slate-600 max-w-3xl mx-auto mb-8">Voxora AI delivers autonomous voice agents customized for your vertical — with multilingual support, bias-free interactions, and deep industry knowledge built in.</p>
+</div>
+</section>
+
+<!-- Verticals Grid -->
+<section class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+<!-- Healthcare -->
+<div id="healthcare" class="glass-card p-8 lg:p-12 mb-12 animate-fade-up">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center text-2xl">🏥</div>
+<h2 class="text-2xl lg:text-3xl font-bold">Healthcare Voice AI</h2>
+</div>
+<p class="dark:text-slate-400 text-slate-600 mb-6">HIPAA-compliant appointment scheduling, prescription refill support, and patient triage — in 9+ languages with medical terminology accuracy across all accents.</p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Appointment scheduling with smart conflict resolution</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Bias-mitigated triage — equal urgency assessment regardless of accent</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Multilingual medical terminology with cultural sensitivity</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Prescription refill automation with verification</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Insurance verification and pre-authorization</span></li>
+</ul>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">HIPAA Compliant</span>
+<span class="px-3 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">HL7 FHIR Ready</span>
+<span class="px-3 py-1 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">9+ Languages</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-semibold mb-4 text-sm text-brand-400">Sample Interaction — Bias-Free Patient Triage</h3>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Patient:</span> "I've been having chest pains since this morning."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I understand you're experiencing chest pain. This is a priority concern. Let me connect you with our urgent care nurse immediately. Can you confirm — are you also experiencing shortness of breath or dizziness?"</div>
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Patient:</span> "Just the chest pain."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "Thank you. I'm transferring you to Nurse Martinez now. If symptoms worsen, please call 911 immediately. Transferring in 3 seconds."</div>
+</div>
+<div class="mt-4 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-xs text-emerald-400">
+✓ Same urgency classification applied regardless of caller's accent, dialect, or language
+</div>
+</div>
+</div>
+</div>
+
+<!-- Real Estate -->
+<div id="real-estate" class="glass-card p-8 lg:p-12 mb-12 animate-fade-up">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center text-2xl">🏠</div>
+<h2 class="text-2xl lg:text-3xl font-bold">Real Estate Voice AI</h2>
+</div>
+<p class="dark:text-slate-400 text-slate-600 mb-6">24/7 lead qualification, property inquiries, showing scheduling, and follow-ups — ensuring fair treatment regardless of caller's accent or dialect.</p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Lead qualification with zero linguistic profiling</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Multilingual property descriptions with cultural context</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Smart showing scheduler across time zones</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Automated follow-ups with personalized property matches</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Fair Housing Act compliance built into every interaction</span></li>
+</ul>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Fair Housing Compliant</span>
+<span class="px-3 py-1 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">MLS Integration</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-semibold mb-4 text-sm text-brand-400">Sample Interaction — Fair Lead Qualification</h3>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Caller:</span> "I'm interested in the listing on Oak Street."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "Great choice! The Oak Street property is a 3-bedroom, 2-bath home with a renovated kitchen and a large backyard. It's listed at $425,000. Would you like to schedule a showing this week?"</div>
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Caller:</span> "Yes, what's available on Saturday?"</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I have openings at 10 AM and 2 PM on Saturday. Which time works best? I'll also send you the property brochure and neighborhood details by email."</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- E-commerce -->
+<div id="ecommerce" class="glass-card p-8 lg:p-12 mb-12 animate-fade-up">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center text-2xl">🛒</div>
+<h2 class="text-2xl lg:text-3xl font-bold">E-commerce Voice AI</h2>
+</div>
+<p class="dark:text-slate-400 text-slate-600 mb-6">Order status, returns, product recommendations, and payment support — with consistent service quality across all languages and dialects.</p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Instant order tracking in any language</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Bias-free product recommendations</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Secure payment processing with PCI compliance</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Returns and exchanges handled autonomously</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Multi-currency support with localized pricing</span></li>
+</ul>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">PCI DSS Level 1</span>
+<span class="px-3 py-1 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">Shopify + WooCommerce</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-semibold mb-4 text-sm text-brand-400">Sample Interaction — Multilingual Support</h3>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Customer:</span> "Where is my order #12345?"</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "Your order #12345 shipped yesterday via FedEx and is currently in transit. The tracking number is FX-789456. Expected delivery is Thursday by 5 PM. Would you like tracking updates via SMS?"</div>
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Customer:</span> "Yes, and I also want to return the shoes from my last order."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I can help with that. I'll generate a prepaid return label and send it to your email. Once we receive the shoes, your refund will process within 3-5 business days."</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Professional Services -->
+<div id="professional" class="glass-card p-8 lg:p-12 mb-12 animate-fade-up">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center text-2xl">💼</div>
+<h2 class="text-2xl lg:text-3xl font-bold">Professional Services Voice AI</h2>
+</div>
+<p class="dark:text-slate-400 text-slate-600 mb-6">Client intake, consultation booking, billing inquiries, and document follow-ups for law firms, accounting, and consulting — with confidentiality built in.</p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Confidential client intake with end-to-end encryption</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Smart consultation scheduling with conflict checks</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Equal service quality for all callers</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Billing and invoice inquiries handled securely</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Document request and follow-up automation</span></li>
+</ul>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Attorney-Client Privilege</span>
+<span class="px-3 py-1 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">Clio + MyCase</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-semibold mb-4 text-sm text-brand-400">Sample Interaction — Client Intake</h3>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Client:</span> "I need to speak with an attorney about a contract dispute."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I can help connect you with our contract law team. This call is confidential and encrypted. Let me gather some basic details to ensure we match you with the right attorney. Can you briefly describe the nature of the dispute?"</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Insurance -->
+<div id="insurance" class="glass-card p-8 lg:p-12 mb-12 animate-fade-up">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center text-2xl">🛡️</div>
+<h2 class="text-2xl lg:text-3xl font-bold">Insurance Voice AI</h2>
+</div>
+<p class="dark:text-slate-400 text-slate-600 mb-6">Claims intake, policy inquiries, quote generation, and renewal reminders — with bias-free risk assessment communication across all demographics.</p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Fair claims processing — no accent-based bias</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Instant multilingual quote generation</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Compliant documentation in caller's preferred language</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Automated renewal reminders and policy updates</span></li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-brand-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>FNOL (First Notice of Loss) intake automation</span></li>
+</ul>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">SOC 2 Certified</span>
+<span class="px-3 py-1 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">Guidewire + Duck Creek</span>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h3 class="font-semibold mb-4 text-sm text-brand-400">Sample Interaction — Fair Claims Intake</h3>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Policyholder:</span> "I need to file a claim for water damage."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I'm sorry to hear about the water damage. I'll guide you through the claims process step by step. First, can you tell me when the damage occurred and its approximate extent?"</div>
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Policyholder:</span> "It happened last night. The kitchen is flooded."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I've created claim #CL-2026-4821 for you. A claims adjuster will contact you within 24 hours. In the meantime, please document the damage with photos. I'll send emergency mitigation tips to your phone."</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="text-center py-12">
+<h2 class="text-3xl font-black mb-6 gradient-text">Ready to Deploy for Your Industry?</h2>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">Book Your Industry Demo</a>
+<a href="pricing.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">View Pricing</a>
+</div>
+</div>
+
+</div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t dark:border-slate-800 border-slate-200 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center">
+<svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="font-bold gradient-text">Voxora AI</span>
+</div>
+<div class="flex flex-wrap gap-6 text-sm dark:text-slate-400 text-slate-500">
+<a href="index.html" class="hover:text-brand-400 transition-colors">Home</a>
+<a href="ethics.html" class="hover:text-brand-400 transition-colors">Ethics Charter</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Accessibility</a>
+</div>
+<p class="text-sm dark:text-slate-500 text-slate-400">&copy; 2026 Voxora AI. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

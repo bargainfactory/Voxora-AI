@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Voxora AI Features — Multilingual engine, voice bias mitigation, autonomous agents, CRM integration, analytics, and secure payment processing."/>
+<title>Features — Voxora AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63'},accent:{400:'#818cf8',500:'#6366f1',600:'#4f46e5'}}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}.dark body{background:#0a0e27;color:#e2e8f0}::selection{background:rgba(6,182,212,0.3)}.glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}.glass-card{background:rgba(15,23,42,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem;transition:all .3s ease}.glass-card:hover{border-color:rgba(6,182,212,0.3);transform:translateY(-2px)}.gradient-text{background:linear-gradient(135deg,#06b6d4,#6366f1,#06b6d4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.animate-fade-up{animation:fade-up .6s ease both}@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2)}50%{box-shadow:0 0 40px rgba(6,182,212,0.4)}}.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}:focus-visible{outline:2px solid #06b6d4;outline-offset:2px;border-radius:4px}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.3);border-radius:4px}
+</style>
+</head>
+<body class="dark:bg-[#0a0e27] bg-slate-50 dark:text-slate-200 text-slate-800 font-sans">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:z-[9999] focus:bg-brand-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+
+<nav class="fixed top-0 inset-x-0 z-50 glass shadow-lg" role="navigation" aria-label="Main navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 lg:h-20">
+<a href="index.html" class="flex items-center gap-2" aria-label="Voxora AI Home">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center animate-pulse-glow"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+<span class="text-xl font-bold gradient-text">Voxora AI</span>
+</a>
+<div class="hidden lg:flex items-center gap-1">
+<a href="solutions.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Solutions</a>
+<a href="features.html" class="px-3 py-2 text-sm font-medium text-brand-400 border-b-2 border-brand-400 rounded-none">Features</a>
+<a href="how-it-works.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">How It Works</a>
+<a href="ethics.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Ethics &amp; Bias</a>
+<a href="security.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Security</a>
+<a href="pricing.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Pricing</a>
+<a href="resources.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Resources</a>
+</div>
+<div class="flex items-center gap-2">
+<a href="demo.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300">Book Secure Demo</a>
+<a href="login.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl border dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all">Login</a>
+</div>
+</div>
+</div>
+</nav>
+
+<main id="main-content" class="pt-24 lg:pt-32">
+<section class="py-16 lg:py-24 relative">
+<div class="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#0f1740] to-[#0a0e27]"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-accent-500/10 text-accent-400 border border-accent-500/20 mb-4">Platform Features</span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 animate-fade-up"><span class="gradient-text">Enterprise-Grade Voice Intelligence</span></h1>
+<p class="text-lg dark:text-slate-400 text-slate-600 max-w-3xl mx-auto">Every feature built with ethics, accessibility, and global readiness at its core.</p>
+</div>
+</section>
+
+<section class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-2 gap-8">
+
+<!-- Multilingual Engine -->
+<div class="glass-card p-8 group">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-400/20 to-brand-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">Multilingual Engine</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">9+ languages with real-time switching, cultural context awareness, and native-quality pronunciation across 100+ accent datasets.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Real-time language detection and switching</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Cultural nuance understanding per region</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Industry-specific terminology in each language</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Dialect and accent recognition with 99.7% parity</li>
+</ul>
+</div>
+
+<!-- Voice Bias Mitigation -->
+<div class="glass-card p-8 group border-brand-500/30">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">Voice Bias Mitigation</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">Proactive fairness audits, real-time accent adaptation, explainable outputs, and continuous monitoring to ensure equal treatment for every caller.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>100+ accent and dialect training datasets</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Real-time fairness monitoring dashboards</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Quarterly third-party bias audits</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Explainable AI decision transparency</li>
+</ul>
+</div>
+
+<!-- Autonomous Agents -->
+<div class="glass-card p-8 group">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-400/20 to-accent-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">Autonomous Agents</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">Fully autonomous inbound call handling: qualification, booking, Tier-1 support, CRM updates, and intelligent escalation — 24/7.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Lead qualification with custom scoring models</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Smart escalation to human agents when needed</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Multi-turn conversation memory</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Context-aware follow-up scheduling</li>
+</ul>
+</div>
+
+<!-- CRM Integration -->
+<div class="glass-card p-8 group">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-400/20 to-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">CRM Integration</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">Seamless sync with Salesforce, HubSpot, Zoho, and 50+ CRMs. Auto-log calls, update records, and trigger workflows in real time.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>50+ CRM integrations out of the box</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Automatic call logging and transcription</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Custom workflow triggers</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Bi-directional data sync</li>
+</ul>
+</div>
+
+<!-- Analytics Dashboard -->
+<div class="glass-card p-8 group">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">Analytics Dashboard</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">Real-time call analytics, sentiment tracking, conversion metrics, and bias monitoring dashboards with exportable reports.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Real-time call volume and quality metrics</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Sentiment analysis per conversation</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Bias variance tracking across demographics</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Custom report builder with scheduled exports</li>
+</ul>
+</div>
+
+<!-- Payment Processing -->
+<div class="glass-card p-8 group">
+<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-400/20 to-rose-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<svg class="w-7 h-7 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+</div>
+<h3 class="text-xl font-bold mb-3">Payment Processing</h3>
+<p class="dark:text-slate-400 text-slate-600 mb-4">PCI DSS Level 1 compliant voice payments. Secure card capture, tokenization, and multi-currency processing across all supported languages.</p>
+<ul class="space-y-2 text-sm dark:text-slate-400 text-slate-500">
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>PCI DSS Level 1 certified</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Tokenized card storage via Stripe</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Multi-currency in 135+ currencies</li>
+<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Voice-based payment verification</li>
+</ul>
+</div>
+
+</div>
+
+<!-- CTA -->
+<div class="text-center py-16">
+<h2 class="text-3xl font-black mb-6 gradient-text">See All Features in Action</h2>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">Book Your Demo</a>
+<a href="pricing.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">View Pricing</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="border-t dark:border-slate-800 border-slate-200 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center"><svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg></div><span class="font-bold gradient-text">Voxora AI</span></div>
+<div class="flex flex-wrap gap-6 text-sm dark:text-slate-400 text-slate-500">
+<a href="index.html" class="hover:text-brand-400 transition-colors">Home</a>
+<a href="ethics.html" class="hover:text-brand-400 transition-colors">Ethics Charter</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Accessibility</a>
+</div>
+<p class="text-sm dark:text-slate-500 text-slate-400">&copy; 2026 Voxora AI. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>
