@@ -20,6 +20,7 @@
 .mic-active{animation:pulse-glow 1s ease-in-out infinite;background:linear-gradient(135deg,#ef4444,#dc2626)!important}
 .quick-reply{cursor:pointer;transition:all .2s ease}
 .quick-reply:hover{background:rgba(6,182,212,0.2);border-color:#06b6d4}
+.waveform-bar{display:inline-block;width:3px;margin:0 1px;background:linear-gradient(to top,#06b6d4,#6366f1);border-radius:2px;transition:height .05s ease}
 </style>
 </head>
 <body class="dark">
@@ -166,6 +167,16 @@ Reset
 </button>
 </div>
 
+<!-- Call controls bar -->
+<div class="flex items-center justify-between mb-4">
+<div class="text-lg font-mono font-bold text-brand-400" id="callTimerDisplay">00:00</div>
+<div class="flex gap-2">
+<button id="muteBtn" onclick="toggleMute()" class="p-2 rounded-lg dark:bg-slate-800 hover:bg-red-500/20 transition-colors" aria-label="Mute"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m-4 0h8m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg></button>
+<button id="holdBtn" onclick="toggleHold()" class="p-2 rounded-lg dark:bg-slate-800 hover:bg-amber-500/20 transition-colors" aria-label="Hold"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></button>
+<button onclick="resetDemo()" class="p-2 rounded-lg bg-red-500/80 hover:bg-red-500 text-white transition-colors" aria-label="End call"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 8l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M5 3a2 2 0 00-2 2v1c0 8.284 6.716 15 15 15h1a2 2 0 002-2v-3.28a1 1 0 00-.684-.948l-4.493-1.498a1 1 0 00-1.21.502l-1.13 2.257a11.042 11.042 0 01-5.516-5.517l2.257-1.128a1 1 0 00.502-1.21L9.228 3.683A1 1 0 008.279 3H5z"/></svg></button>
+</div>
+</div>
+
 <!-- Scenario selector -->
 <div class="flex flex-wrap gap-2 mb-6 animate-fade-up" style="animation-delay:0.1s">
 <button class="scenario-pill px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-slate-300 active" data-scenario="property" onclick="selectScenario(this)">Property Inquiry</button>
@@ -189,9 +200,10 @@ Reset
 </div>
 </div>
 
-<!-- Waveform -->
-<div id="waveformContainer" class="hidden mb-4">
-<canvas id="waveformCanvas" class="w-full h-12 rounded-xl glass-card"></canvas>
+<!-- Dual Waveform Bars -->
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="glass-card p-3 rounded-lg"><div class="text-xs text-slate-500 mb-1">Your Voice</div><div id="userWaveform" class="h-12 flex items-center justify-center gap-[2px]"></div></div>
+<div class="glass-card p-3 rounded-lg"><div class="text-xs text-slate-500 mb-1">Agent Voice</div><div id="agentWaveform" class="h-12 flex items-center justify-center gap-[2px]"></div></div>
 </div>
 
 <!-- Quick replies -->
@@ -199,8 +211,12 @@ Reset
 </div>
 
 <!-- Input area -->
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Voice & Text</span>
+<div id="voiceStatus" class="hidden flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span><span class="text-[10px] text-red-400 font-medium">Listening...</span></div>
+</div>
 <div class="glass-card p-3 flex items-center gap-3 animate-fade-up" style="animation-delay:0.4s">
-<input type="text" id="userInput" placeholder="Type your message or tap the mic..." class="flex-1 bg-transparent border-none text-slate-200 placeholder-slate-500 text-sm focus:outline-none" onkeydown="if(event.key==='Enter')sendMessage()"/>
+<input type="text" id="userInput" placeholder="Type or tap the mic to speak..." class="flex-1 bg-transparent border-none text-slate-200 placeholder-slate-500 text-sm focus:outline-none" onkeydown="if(event.key==='Enter')sendMessage()"/>
 <button id="micBtn" onclick="toggleMic()" class="w-10 h-10 rounded-xl bg-slate-700/60 flex items-center justify-center hover:bg-brand-500/30 transition-all" aria-label="Toggle microphone">
 <svg class="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
 </button>
@@ -208,6 +224,7 @@ Reset
 <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
 </button>
 </div>
+<div id="interimTranscript" class="hidden mt-1 px-3 py-1.5 rounded-lg dark:bg-slate-800/40 text-xs text-slate-400 italic"></div>
 </div>
 </section>
 
@@ -231,6 +248,8 @@ let recognition = null;
 let audioCtx = null;
 let analyser = null;
 let animFrame = null;
+let callSeconds=0, callTimerInterval=null, isMuted=false, isOnHold=false;
+let userWaveformBars=[], agentWaveformBars=[];
 
 // ===== Tone Modifiers =====
 const toneModifiers = {
@@ -517,6 +536,7 @@ function selectScenario(el){
 // ===== Speech =====
 function speakText(text){
   if(!('speechSynthesis' in window)) return;
+  if(isOnHold) return;
   window.speechSynthesis.cancel();
   const utter=new SpeechSynthesisUtterance(text);
   utter.rate=1; utter.pitch=1;
@@ -527,100 +547,30 @@ function speakText(text){
 }
 
 function toggleMic(){
-  const btn=document.getElementById('micBtn');
-  if(isRecording){
-    stopRecording();
-    btn.classList.remove('mic-active');
-    document.getElementById('waveformContainer').classList.add('hidden');
-    cancelAnimationFrame(animFrame);
-    return;
-  }
-  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SpeechRecognition){
-    addMessage('[Voice input is not supported in this browser. Please type your message.]', false, true);
-    return;
-  }
-  recognition=new SpeechRecognition();
-  recognition.continuous=false;
-  recognition.interimResults=false;
-  recognition.lang='en-US';
-  recognition.onresult=(e)=>{
-    const transcript=e.results[0][0].transcript;
-    document.getElementById('userInput').value=transcript;
-    sendMessage();
-  };
-  recognition.onerror=()=>{ stopRecording(); btn.classList.remove('mic-active'); document.getElementById('waveformContainer').classList.add('hidden'); };
-  recognition.onend=()=>{ isRecording=false; btn.classList.remove('mic-active'); document.getElementById('waveformContainer').classList.add('hidden'); cancelAnimationFrame(animFrame); };
-  recognition.start();
-  isRecording=true;
-  btn.classList.add('mic-active');
-  startWaveform();
+  if(isRecording){stopRecording();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){addMessage('[Voice not supported. Please type.]',false,true);return;}
+  recognition=new SR();recognition.continuous=true;recognition.interimResults=true;recognition.lang='en-US';
+  const interimEl=document.getElementById('interimTranscript');
+  recognition.onresult=(e)=>{let interim='',final='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)final+=t;else interim+=t;}if(interim){interimEl.classList.remove('hidden');interimEl.textContent=interim+'...';}if(final){interimEl.classList.add('hidden');document.getElementById('userInput').value=final;sendMessage();}};
+  recognition.onerror=()=>stopRecording();
+  recognition.onend=()=>{if(isRecording)try{recognition.start();}catch(e){stopRecording();}};
+  recognition.start();isRecording=true;
+  document.getElementById('micBtn').classList.add('mic-active');
+  document.getElementById('voiceStatus').classList.remove('hidden');
+  try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{const src=audioCtx.createMediaStreamSource(s);analyser=audioCtx.createAnalyser();analyser.fftSize=64;src.connect(analyser);}).catch(()=>{});}catch(e){}
 }
 
-function stopRecording(){
-  if(recognition){ recognition.stop(); recognition=null; }
-  isRecording=false;
-}
+function stopRecording(){if(recognition)try{recognition.stop();}catch(e){}recognition=null;isRecording=false;document.getElementById('micBtn').classList.remove('mic-active');document.getElementById('voiceStatus').classList.add('hidden');document.getElementById('interimTranscript').classList.add('hidden');}
 
-function startWaveform(){
-  const container=document.getElementById('waveformContainer');
-  container.classList.remove('hidden');
-  const canvas=document.getElementById('waveformCanvas');
-  const ctx=canvas.getContext('2d');
-  canvas.width=canvas.offsetWidth*2;
-  canvas.height=96;
+function startCallTimer(){callTimerInterval=setInterval(()=>{callSeconds++;document.getElementById('callTimerDisplay').textContent=String(Math.floor(callSeconds/60)).padStart(2,'0')+':'+String(callSeconds%60).padStart(2,'0');},1000);}
 
-  try{
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
-      const source=audioCtx.createMediaStreamSource(stream);
-      analyser=audioCtx.createAnalyser();
-      analyser.fftSize=256;
-      source.connect(analyser);
-      drawWaveform(ctx, canvas);
-    }).catch(()=>{drawFakeWaveform(ctx,canvas);});
-  }catch(e){drawFakeWaveform(ctx,canvas);}
-}
+function initWaveformBars(){const u=document.getElementById('userWaveform'),a=document.getElementById('agentWaveform');u.innerHTML='';a.innerHTML='';userWaveformBars=[];agentWaveformBars=[];for(let i=0;i<24;i++){const b1=document.createElement('div');b1.className='waveform-bar';b1.style.height='2px';u.appendChild(b1);userWaveformBars.push(b1);const b2=document.createElement('div');b2.className='waveform-bar';b2.style.height='2px';b2.style.background='linear-gradient(to top,#6366f1,#06b6d4)';a.appendChild(b2);agentWaveformBars.push(b2);}}
 
-function drawWaveform(ctx, canvas){
-  const bufferLength=analyser.frequencyBinCount;
-  const dataArray=new Uint8Array(bufferLength);
-  function draw(){
-    animFrame=requestAnimationFrame(draw);
-    analyser.getByteFrequencyData(dataArray);
-    ctx.fillStyle='rgba(10,14,39,0.3)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    const barWidth=(canvas.width/bufferLength)*2.5;
-    let x=0;
-    for(let i=0;i<bufferLength;i++){
-      const barHeight=(dataArray[i]/255)*canvas.height*0.8;
-      const gradient=ctx.createLinearGradient(0,canvas.height,0,canvas.height-barHeight);
-      gradient.addColorStop(0,'#06b6d4');gradient.addColorStop(1,'#6366f1');
-      ctx.fillStyle=gradient;
-      ctx.fillRect(x,canvas.height-barHeight,barWidth-1,barHeight);
-      x+=barWidth;
-    }
-  }
-  draw();
-}
+function animateWaveforms(){if(analyser&&!isMuted){const buf=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(buf);for(let i=0;i<24;i++){userWaveformBars[i].style.height=Math.max(2,(buf[i%buf.length]/255)*48)+'px';agentWaveformBars[i].style.height=(Math.random()*20+2)+'px';}}else{for(let i=0;i<24;i++){userWaveformBars[i].style.height=(isRecording&&!isMuted?Math.random()*40+4:2)+'px';agentWaveformBars[i].style.height=(Math.random()*20+2)+'px';}}animFrame=requestAnimationFrame(animateWaveforms);}
 
-function drawFakeWaveform(ctx, canvas){
-  function draw(){
-    animFrame=requestAnimationFrame(draw);
-    ctx.fillStyle='rgba(10,14,39,0.3)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    const bars=40;
-    const barWidth=canvas.width/bars;
-    for(let i=0;i<bars;i++){
-      const h=Math.random()*canvas.height*0.6+10;
-      const gradient=ctx.createLinearGradient(0,canvas.height,0,canvas.height-h);
-      gradient.addColorStop(0,'#06b6d4');gradient.addColorStop(1,'#6366f1');
-      ctx.fillStyle=gradient;
-      ctx.fillRect(i*barWidth,canvas.height-h,barWidth-2,h);
-    }
-  }
-  draw();
-}
+function toggleMute(){isMuted=!isMuted;document.getElementById('muteBtn').classList.toggle('bg-red-500/20');}
+function toggleHold(){isOnHold=!isOnHold;document.getElementById('holdBtn').classList.toggle('bg-amber-500/20');if(isOnHold)window.speechSynthesis.cancel();}
 
 // ===== Form Handling =====
 document.getElementById('configForm').addEventListener('submit',function(e){
@@ -638,6 +588,8 @@ document.getElementById('configForm').addEventListener('submit',function(e){
   document.getElementById('simulatorSection').classList.remove('hidden');
   document.getElementById('simTitle').textContent=companyConfig.name+' \u2014 Voice AI Demo';
 
+  initWaveformBars();startCallTimer();animateWaveforms();
+
   const greeting=companyConfig.greeting || `Thank you for calling ${companyConfig.name}. How can I help you with your real estate needs today?`;
   addMessage(greeting, false);
   conversationHistory.push({role:'ai',text:greeting});
@@ -645,6 +597,8 @@ document.getElementById('configForm').addEventListener('submit',function(e){
 });
 
 function resetDemo(){
+  stopRecording();clearInterval(callTimerInterval);cancelAnimationFrame(animFrame);callSeconds=0;isMuted=false;isOnHold=false;
+  document.getElementById('callTimerDisplay').textContent='00:00';
   document.getElementById('simulatorSection').classList.add('hidden');
   document.getElementById('customizeSection').classList.remove('hidden');
   document.getElementById('chatMessages').innerHTML='';
