@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Real Estate Voice AI Demo — Voxora AI</title>
+<meta name="description" content="Try Voxora AI's real estate voice agent — customize it for your agency and experience Fair Housing-compliant lead qualification."/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63'},accent:{400:'#818cf8',500:'#6366f1',600:'#4f46e5'}}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}.dark body{background:#0a0e27;color:#e2e8f0}::selection{background:rgba(6,182,212,0.3)}.glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}.glass-card{background:rgba(15,23,42,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem;transition:all .3s ease}.glass-card:hover{border-color:rgba(6,182,212,0.3)}.gradient-text{background:linear-gradient(135deg,#06b6d4,#6366f1,#06b6d4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.animate-fade-up{animation:fade-up .6s ease both}@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2)}50%{box-shadow:0 0 40px rgba(6,182,212,0.4)}}.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}:focus-visible{outline:2px solid #06b6d4;outline-offset:2px;border-radius:4px}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.3);border-radius:4px}
+
+.typing-dot{width:8px;height:8px;border-radius:50%;background:#06b6d4;display:inline-block;margin:0 2px;animation:typingBounce 1.4s infinite ease-in-out both}
+.typing-dot:nth-child(1){animation-delay:-0.32s}
+.typing-dot:nth-child(2){animation-delay:-0.16s}
+@keyframes typingBounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+.scenario-pill{cursor:pointer;transition:all .3s ease}
+.scenario-pill.active{background:linear-gradient(135deg,#06b6d4,#6366f1);color:#fff;border-color:transparent}
+.mic-active{animation:pulse-glow 1s ease-in-out infinite;background:linear-gradient(135deg,#ef4444,#dc2626)!important}
+.quick-reply{cursor:pointer;transition:all .2s ease}
+.quick-reply:hover{background:rgba(6,182,212,0.2);border-color:#06b6d4}
+</style>
+</head>
+<body class="dark">
+
+<nav class="fixed top-0 inset-x-0 z-50 glass shadow-lg" role="navigation" aria-label="Main navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 lg:h-20">
+<a href="index.html" class="flex items-center gap-2" aria-label="Voxora AI Home">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center animate-pulse-glow"><svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+<span class="text-xl font-bold gradient-text">Voxora AI</span>
+</a>
+<div class="hidden lg:flex items-center gap-1">
+<a href="solutions.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Solutions</a>
+<a href="features.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Features</a>
+<a href="how-it-works.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">How It Works</a>
+<a href="ethics.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Ethics &amp; Bias</a>
+<a href="security.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Security</a>
+<a href="pricing.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Pricing</a>
+<a href="resources.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Resources</a>
+</div>
+<div class="flex items-center gap-2">
+<a href="demo.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300">Book Secure Demo</a>
+<a href="login.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl border dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all">Login</a>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- STATE 1: Customization Form -->
+<section id="customizeSection" class="pt-28 pb-16 min-h-screen">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-12 items-start">
+<!-- Left Column: Intro -->
+<div class="animate-fade-up">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-sm text-brand-400 font-medium mb-6">
+<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/></svg>
+Real Estate AI
+</div>
+<h1 class="text-4xl lg:text-5xl font-bold mb-6">
+<span class="gradient-text">Real Estate Voice AI</span><br/>
+<span class="text-slate-200">Demo Experience</span>
+</h1>
+<p class="text-lg text-slate-400 mb-8 leading-relaxed">Customize a Fair Housing-compliant voice AI agent for your real estate business. Experience how Voxora AI qualifies leads, schedules showings, and answers property inquiries around the clock.</p>
+
+<div class="space-y-4 mb-8">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+<div><h3 class="font-semibold text-slate-200">Fair Housing Act Compliant</h3><p class="text-sm text-slate-400">Built-in compliance guardrails ensure every interaction meets Fair Housing standards.</p></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg></div>
+<div><h3 class="font-semibold text-slate-200">Multilingual Lead Qualification</h3><p class="text-sm text-slate-400">Qualify leads in English, Spanish, Mandarin, and 40+ other languages.</p></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+<div><h3 class="font-semibold text-slate-200">Automated Showing Scheduling</h3><p class="text-sm text-slate-400">Prospects book property tours 24/7 with automatic calendar sync.</p></div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg></div>
+<div><h3 class="font-semibold text-slate-200">CRM Integration with MLS</h3><p class="text-sm text-slate-400">Real-time sync with your MLS, CRM, and showing management platforms.</p></div>
+</div>
+</div>
+</div>
+
+<!-- Right Column: Form -->
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.2s">
+<h2 class="text-2xl font-bold text-slate-100 mb-2">Customize Your AI Agent</h2>
+<p class="text-slate-400 mb-6 text-sm">Configure the voice AI to match your real estate business, then test it live.</p>
+<form id="configForm" class="space-y-5">
+<div>
+<label for="companyName" class="block text-sm font-medium text-slate-300 mb-1.5">Company Name <span class="text-red-400">*</span></label>
+<input type="text" id="companyName" required placeholder="e.g. Pinnacle Realty Group" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm"/>
+</div>
+<div>
+<label for="industrySubtype" class="block text-sm font-medium text-slate-300 mb-1.5">Industry Sub-type</label>
+<select id="industrySubtype" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm">
+<option value="Residential Brokerage">Residential Brokerage</option>
+<option value="Commercial Real Estate">Commercial Real Estate</option>
+<option value="Property Management">Property Management</option>
+<option value="Luxury Real Estate">Luxury Real Estate</option>
+<option value="New Construction">New Construction</option>
+<option value="Rental Agency">Rental Agency</option>
+</select>
+</div>
+<div>
+<label for="useCase" class="block text-sm font-medium text-slate-300 mb-1.5">Primary Use Case</label>
+<select id="useCase" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm">
+<option value="Lead Qualification">Lead Qualification</option>
+<option value="Property Inquiries">Property Inquiries</option>
+<option value="Schedule Viewings">Schedule Viewings</option>
+<option value="Mortgage Pre-qualification">Mortgage Pre-qualification</option>
+<option value="Market Updates">Market Updates</option>
+<option value="Tenant Screening">Tenant Screening</option>
+</select>
+</div>
+<div>
+<label for="voiceTone" class="block text-sm font-medium text-slate-300 mb-1.5">AI Voice Tone</label>
+<select id="voiceTone" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm">
+<option value="Professional">Professional</option>
+<option value="Friendly">Friendly</option>
+<option value="Warm & Empathetic">Warm &amp; Empathetic</option>
+<option value="Casual">Casual</option>
+</select>
+</div>
+<div>
+<label for="keyServices" class="block text-sm font-medium text-slate-300 mb-1.5">Key Services</label>
+<textarea id="keyServices" rows="3" placeholder="e.g. Residential sales, luxury listings, buyer representation, property management, investment consulting" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm resize-none"></textarea>
+</div>
+<div>
+<label for="businessHours" class="block text-sm font-medium text-slate-300 mb-1.5">Business Hours</label>
+<input type="text" id="businessHours" placeholder="e.g. Mon-Sat 9am-7pm, Sun 11am-5pm" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm"/>
+</div>
+<div>
+<label for="customGreeting" class="block text-sm font-medium text-slate-300 mb-1.5">Custom Greeting <span class="text-slate-500">(optional)</span></label>
+<textarea id="customGreeting" rows="2" placeholder="e.g. Thank you for calling Pinnacle Realty Group! How can I help you find your dream home?" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-sm resize-none"></textarea>
+</div>
+<button type="submit" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300 text-sm flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+Launch Personalized Demo
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<!-- STATE 2: Voice Demo Simulator -->
+<section id="simulatorSection" class="pt-28 pb-16 min-h-screen hidden">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Header bar -->
+<div class="glass-card p-4 flex items-center justify-between mb-6 animate-fade-up">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/></svg>
+</div>
+<div>
+<h2 class="font-bold text-slate-100 text-lg" id="simTitle">Company — Voice AI Demo</h2>
+<p class="text-xs text-slate-400">Real Estate AI Simulator &bull; Fair Housing Compliant</p>
+</div>
+</div>
+<button onclick="resetDemo()" class="px-4 py-2 rounded-xl border border-slate-600 text-sm text-slate-300 hover:border-brand-400 hover:text-brand-400 transition-all flex items-center gap-2">
+<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+Reset
+</button>
+</div>
+
+<!-- Scenario selector -->
+<div class="flex flex-wrap gap-2 mb-6 animate-fade-up" style="animation-delay:0.1s">
+<button class="scenario-pill px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-slate-300 active" data-scenario="property" onclick="selectScenario(this)">Property Inquiry</button>
+<button class="scenario-pill px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-slate-300" data-scenario="viewing" onclick="selectScenario(this)">Schedule Viewing</button>
+<button class="scenario-pill px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-slate-300" data-scenario="mortgage" onclick="selectScenario(this)">Mortgage Info</button>
+<button class="scenario-pill px-4 py-2 rounded-full text-sm font-medium border border-slate-700 text-slate-300" data-scenario="market" onclick="selectScenario(this)">Market Update</button>
+</div>
+
+<!-- Chat window -->
+<div class="glass-card p-4 mb-4 animate-fade-up" style="animation-delay:0.2s">
+<div id="chatMessages" class="overflow-y-auto max-h-[400px] space-y-4 pr-2 scroll-smooth">
+</div>
+<!-- Typing indicator -->
+<div id="typingIndicator" class="hidden mt-4 flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center flex-shrink-0">
+<svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<div class="glass-card px-4 py-3 rounded-2xl rounded-bl-md">
+<div class="flex items-center gap-1"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+</div>
+</div>
+</div>
+
+<!-- Waveform -->
+<div id="waveformContainer" class="hidden mb-4">
+<canvas id="waveformCanvas" class="w-full h-12 rounded-xl glass-card"></canvas>
+</div>
+
+<!-- Quick replies -->
+<div id="quickReplies" class="flex flex-wrap gap-2 mb-4 animate-fade-up" style="animation-delay:0.3s">
+</div>
+
+<!-- Input area -->
+<div class="glass-card p-3 flex items-center gap-3 animate-fade-up" style="animation-delay:0.4s">
+<input type="text" id="userInput" placeholder="Type your message or tap the mic..." class="flex-1 bg-transparent border-none text-slate-200 placeholder-slate-500 text-sm focus:outline-none" onkeydown="if(event.key==='Enter')sendMessage()"/>
+<button id="micBtn" onclick="toggleMic()" class="w-10 h-10 rounded-xl bg-slate-700/60 flex items-center justify-center hover:bg-brand-500/30 transition-all" aria-label="Toggle microphone">
+<svg class="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+</button>
+<button onclick="sendMessage()" class="w-10 h-10 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 flex items-center justify-center hover:shadow-lg hover:shadow-brand-500/25 transition-all" aria-label="Send message">
+<svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+</button>
+</div>
+</div>
+</section>
+
+<footer class="border-t dark:border-slate-800 border-slate-200 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center"><svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg></div><span class="font-bold gradient-text">Voxora AI</span></div>
+<div class="flex flex-wrap gap-6 text-sm dark:text-slate-400 text-slate-500"><a href="index.html" class="hover:text-brand-400 transition-colors">Home</a><a href="ethics.html" class="hover:text-brand-400 transition-colors">Ethics Charter</a><a href="privacy-policy.html" class="hover:text-brand-400 transition-colors">Privacy Policy</a><a href="affiliate.html" class="hover:text-brand-400 transition-colors">Affiliates</a></div>
+<p class="text-sm dark:text-slate-500 text-slate-400">&copy; 2026 Voxora AI. All rights reserved.</p>
+</div>
+</div>
+</footer>
+
+<script>
+// ===== Company Config =====
+let companyConfig = {};
+let conversationHistory = [];
+let currentScenario = 'property';
+let isRecording = false;
+let recognition = null;
+let audioCtx = null;
+let analyser = null;
+let animFrame = null;
+
+// ===== Tone Modifiers =====
+const toneModifiers = {
+  'Professional': {
+    greeting: 'Good day',
+    affirmative: 'Certainly',
+    transition: 'Allow me to assist you with that.',
+    closing: 'Is there anything else I may help you with today?',
+    empathy: 'I understand.',
+    filler: ''
+  },
+  'Friendly': {
+    greeting: 'Hi there',
+    affirmative: 'Absolutely!',
+    transition: "I'd love to help you with that!",
+    closing: 'Anything else I can help with?',
+    empathy: "I totally get it — let's make this easy for you!",
+    filler: '!'
+  },
+  'Warm & Empathetic': {
+    greeting: 'Hello and welcome',
+    affirmative: 'Of course, I would be happy to help',
+    transition: "Let me take care of that for you — finding the right home is so important.",
+    closing: 'Please do not hesitate to reach out anytime. We are here to guide you every step of the way.',
+    empathy: 'I completely understand — buying or selling a home is a big decision, and we want to make it as smooth as possible for you.',
+    filler: ''
+  },
+  'Casual': {
+    greeting: 'Hey',
+    affirmative: 'Sure thing',
+    transition: "No worries, let's get into it.",
+    closing: 'Need anything else? Just let me know!',
+    empathy: "Yeah, the market can be wild — let's find you something great.",
+    filler: ''
+  }
+};
+
+// ===== Intent Patterns =====
+const intents = [
+  { name:'property', patterns:[/property/i,/listing/i,/home/i,/house/i,/condo/i,/townhouse/i,/looking for/i], handler: handleProperty },
+  { name:'viewing', patterns:[/viewing/i,/tour/i,/visit/i,/see/i,/showing/i,/walk.?through/i,/open house/i], handler: handleViewing },
+  { name:'price', patterns:[/price/i,/cost/i,/afford/i,/budget/i,/how much/i,/asking/i,/listed at/i], handler: handlePrice },
+  { name:'mortgage', patterns:[/mortgage/i,/loan/i,/pre.?qual/i,/financ/i,/interest rate/i,/down payment/i], handler: handleMortgage },
+  { name:'neighborhood', patterns:[/neighborhood/i,/area/i,/school/i,/commute/i,/safe/i,/community/i,/walkab/i], handler: handleNeighborhood },
+  { name:'size', patterns:[/bedroom/i,/bathroom/i,/sqft/i,/square feet/i,/size/i,/garage/i,/yard/i,/pool/i], handler: handleSize },
+  { name:'sell', patterns:[/sell/i,/list/i,/selling/i,/market value/i,/home value/i,/what.?s my home worth/i], handler: handleSell },
+  { name:'rent', patterns:[/rent/i,/lease/i,/tenant/i,/landlord/i,/rental/i,/month.?to.?month/i], handler: handleRent },
+  { name:'agent', patterns:[/agent/i,/realtor/i,/broker/i,/representative/i,/speak to/i,/talk to/i], handler: handleAgent },
+  { name:'openhouse', patterns:[/open house/i,/event/i,/this weekend/i,/upcoming/i], handler: handleOpenHouse },
+  { name:'offer', patterns:[/offer/i,/bid/i,/negotiat/i,/counter/i,/submit/i,/competing/i], handler: handleOffer },
+  { name:'inspection', patterns:[/inspection/i,/appraisal/i,/inspect/i,/condition/i,/report/i], handler: handleInspection },
+  { name:'closing', patterns:[/closing/i,/escrow/i,/title/i,/settlement/i,/final/i,/paperwork/i], handler: handleClosing },
+  { name:'investment', patterns:[/invest/i,/roi/i,/rental income/i,/cap rate/i,/cash flow/i,/flip/i], handler: handleInvestment },
+  { name:'thanks', patterns:[/thank/i,/thanks/i,/bye/i,/goodbye/i,/that's all/i,/have a good/i,/take care/i], handler: handleThanks }
+];
+
+function getTone(){ return toneModifiers[companyConfig.tone] || toneModifiers['Professional']; }
+function svc(){ return companyConfig.services || 'residential sales, buyer representation, and property management'; }
+
+function handleProperty(){
+  const t=getTone();
+  const responses=[
+    `${t.affirmative}${t.filler} I can help you find the perfect property through ${companyConfig.name}. To narrow down our search, could you tell me your preferred area, number of bedrooms and bathrooms, and your budget range?`,
+    `${t.transition} We specialize in ${svc()}. What type of property are you looking for? A single-family home, condo, or townhouse? And do you have a particular neighborhood in mind?`,
+    `I would love to help you find your next home with ${companyConfig.name}. What are the top three things on your must-have list? And what is your ideal price range?`
+  ];
+  return responses[Math.floor(Math.random()*responses.length)];
+}
+function handleViewing(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} I can schedule a property viewing for you through ${companyConfig.name}. Which property are you interested in seeing? I have availability this week for both in-person tours and virtual walkthroughs. What day and time work best for you?`;
+}
+function handlePrice(){
+  const t=getTone();
+  return `${t.transition} Pricing varies by property, location, and features. At ${companyConfig.name}, we can provide a detailed comparative market analysis for any property you are interested in. Do you have a specific listing in mind, or would you like me to find properties within a certain budget range?`;
+}
+function handleMortgage(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} Getting pre-qualified is a great first step. ${companyConfig.name} works with several trusted lenders who can help you understand your buying power. Would you like me to connect you with one of our preferred mortgage partners? I can also provide a rough estimate if you share your target price range and down payment.`;
+}
+function handleNeighborhood(){
+  const t=getTone();
+  return `${t.transition} Great question! The neighborhood is just as important as the home itself. I can provide details on school ratings, walkability scores, commute times, local amenities, and recent market trends for any area you are considering. Which neighborhoods are you looking at?`;
+}
+function handleSize(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} Got it. Let me search our ${companyConfig.name} listings based on your space requirements. How many bedrooms and bathrooms do you need? And do you have a minimum square footage in mind? Any must-haves like a garage, yard, or pool?`;
+}
+function handleSell(){
+  const t=getTone();
+  return `${t.transition} Thinking about selling? ${companyConfig.name} would love to help you get the best value for your home. We can provide a free comparative market analysis to estimate your home's current value. Would you like to schedule a listing consultation with one of our experienced agents?`;
+}
+function handleRent(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} ${companyConfig.name} has a great selection of rental properties. Could you tell me your preferred area, budget range, and how many bedrooms you need? I can also let you know about pet policies and lease terms for available units.`;
+}
+function handleAgent(){
+  const t=getTone();
+  return `${t.transition} I can connect you with one of our top agents at ${companyConfig.name}. Do you have a specific agent you would like to speak with, or shall I match you with someone based on your needs and preferred area? All our agents are licensed and experienced in ${svc()}.`;
+}
+function handleOpenHouse(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} ${companyConfig.name} has several open houses coming up this weekend. Would you like me to send you a list of upcoming open houses in your preferred area? I can also schedule a private showing if the open house times do not work for you.`;
+}
+function handleOffer(){
+  const t=getTone();
+  return `${t.transition} Submitting a strong offer is crucial in today's market. At ${companyConfig.name}, our agents help you craft competitive offers with the best terms. Would you like guidance on how to structure your offer, or are you ready to submit one on a specific property?`;
+}
+function handleInspection(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} Home inspections and appraisals are important steps in the buying process. ${companyConfig.name} works with certified inspectors who provide thorough reports. Would you like me to explain what the inspection covers, or do you need to schedule one for a property under contract?`;
+}
+function handleClosing(){
+  const t=getTone();
+  return `${t.transition} The closing process involves several steps including title search, final walkthrough, and signing. At ${companyConfig.name}, we guide you through every step to ensure a smooth closing. Would you like an overview of the timeline and what documents you will need?`;
+}
+function handleInvestment(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} Real estate investment can be very rewarding. ${companyConfig.name} specializes in helping investors find properties with strong ROI potential. Are you looking for rental income properties, fix-and-flip opportunities, or long-term appreciation? I can pull up some options based on your investment goals.`;
+}
+function handleThanks(){
+  const t=getTone();
+  return `You are very welcome! Thank you for considering ${companyConfig.name} for your real estate needs. ${t.closing} We look forward to helping you find the perfect property. Have a wonderful day!`;
+}
+function handleDefault(msg){
+  const t=getTone();
+  return `${t.empathy} I want to make sure I help you with exactly what you need at ${companyConfig.name}. Could you tell me a bit more? I can assist with property searches, scheduling viewings, mortgage pre-qualification, market updates, and much more.`;
+}
+
+function detectIntent(message){
+  for(const intent of intents){
+    for(const pattern of intent.patterns){
+      if(pattern.test(message)) return intent;
+    }
+  }
+  return null;
+}
+
+function getQuickReplies(intentName){
+  const map={
+    'property':['3 bed, 2 bath homes','Condos under $400K','Luxury listings','New construction'],
+    'viewing':['This Saturday works','Virtual tour instead','Bring my partner too','Other times available?'],
+    'price':['Under $500K','$500K - $800K','Show me comparables','Price history?'],
+    'mortgage':['Connect me with a lender','Current interest rates?','FHA loan options','Down payment help?'],
+    'neighborhood':['School district info','Crime statistics','Nearby restaurants','Commute times'],
+    'size':['3+ bedrooms','At least 2000 sqft','Need a garage','Pool required'],
+    'sell':['Free home valuation','Listing consultation','How long to sell?','Staging advice?'],
+    'rent':['Pet-friendly rentals','Month-to-month lease?','Move-in costs?','Available now?'],
+    'agent':['Top-rated agents','Spanish-speaking agent?','Buyer specialist','Investment expert'],
+    'openhouse':['This weekend events','Send me the list','Private showing instead','Virtual open house?'],
+    'offer':['How to write an offer','Multiple offer situation?','Contingencies explained','Earnest money?'],
+    'inspection':['Schedule inspection','What does it cover?','Inspection red flags?','Negotiate repairs?'],
+    'closing':['Closing timeline?','Closing costs estimate','What to bring?','Final walkthrough?'],
+    'investment':['Rental properties','Fix and flip deals','Cap rate explained','Best ROI areas?'],
+    'thanks':['Search more properties','Leave a review','Refer a friend','Contact agent']
+  };
+  return map[intentName] || ['Search properties','Schedule a viewing','Mortgage info','Talk to an agent'];
+}
+
+// ===== Scenario Starters =====
+const scenarioStarters={
+  property:'I am looking for a new home in the area.',
+  viewing:'I would like to schedule a showing for one of your listings.',
+  mortgage:'Can you tell me about mortgage pre-qualification?',
+  market:'What does the current real estate market look like in this area?'
+};
+
+// ===== Market handler (for scenario) =====
+function handleMarket(){
+  const t=getTone();
+  return `${t.affirmative}${t.filler} The current real estate market is quite dynamic. At ${companyConfig.name}, we track trends closely. In most areas, we are seeing moderate price appreciation with inventory slowly increasing. Would you like a detailed market report for a specific neighborhood or zip code? I can also share data on average days on market and sale-to-list price ratios.`;
+}
+
+// ===== UI Functions =====
+function addMessage(text, isUser, skipSpeak){
+  const chat=document.getElementById('chatMessages');
+  const wrapper=document.createElement('div');
+  wrapper.className=isUser?'flex justify-end':'flex justify-start';
+  if(isUser){
+    wrapper.innerHTML=`<div class="max-w-[75%] px-4 py-3 rounded-2xl rounded-br-md bg-gradient-to-r from-brand-500 to-accent-500 text-white text-sm">${text}</div>`;
+  } else {
+    wrapper.innerHTML=`
+      <div class="flex items-start gap-2 max-w-[80%]">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </div>
+        <div>
+          <span class="text-xs text-brand-400 font-medium">Voxora AI</span>
+          <div class="glass-card px-4 py-3 rounded-2xl rounded-bl-md mt-1 text-sm text-slate-200">${text}</div>
+        </div>
+      </div>`;
+  }
+  chat.appendChild(wrapper);
+  chat.scrollTop=chat.scrollHeight;
+  if(!isUser && !skipSpeak) speakText(text);
+}
+
+function showTyping(){
+  document.getElementById('typingIndicator').classList.remove('hidden');
+  document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;
+}
+function hideTyping(){
+  document.getElementById('typingIndicator').classList.add('hidden');
+}
+
+function setQuickReplies(replies){
+  const container=document.getElementById('quickReplies');
+  container.innerHTML='';
+  replies.forEach(r=>{
+    const btn=document.createElement('button');
+    btn.className='quick-reply px-3 py-1.5 rounded-full text-xs font-medium border border-slate-700 text-slate-300';
+    btn.textContent=r;
+    btn.onclick=()=>{
+      document.getElementById('userInput').value=r;
+      sendMessage();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function sendMessage(){
+  const input=document.getElementById('userInput');
+  const text=input.value.trim();
+  if(!text) return;
+  input.value='';
+  addMessage(text, true);
+  conversationHistory.push({role:'user',text});
+
+  showTyping();
+  const delay=1000+Math.random()*800;
+  setTimeout(()=>{
+    hideTyping();
+    const intent=detectIntent(text);
+    let response;
+    if(intent){
+      response=intent.handler(text);
+      setQuickReplies(getQuickReplies(intent.name));
+    } else {
+      // Check for market-related keywords not in intent list
+      if(/market|trend|stats|data|median|average/i.test(text)){
+        response=handleMarket();
+        setQuickReplies(['Specific neighborhood?','Price trends?','Inventory levels?','Best time to buy?']);
+      } else {
+        response=handleDefault(text);
+        setQuickReplies(getQuickReplies(null));
+      }
+    }
+    addMessage(response, false);
+    conversationHistory.push({role:'ai',text:response});
+  }, delay);
+}
+
+function selectScenario(el){
+  document.querySelectorAll('.scenario-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  currentScenario=el.dataset.scenario;
+  document.getElementById('chatMessages').innerHTML='';
+  conversationHistory=[];
+  const greeting=companyConfig.greeting || `Thank you for calling ${companyConfig.name}. How can I help you with your real estate needs today?`;
+  addMessage(greeting, false);
+  conversationHistory.push({role:'ai',text:greeting});
+  setTimeout(()=>{
+    const userMsg=scenarioStarters[currentScenario] || 'Hello, I need some help.';
+    addMessage(userMsg, true);
+    conversationHistory.push({role:'user',text:userMsg});
+    showTyping();
+    setTimeout(()=>{
+      hideTyping();
+      let response;
+      if(currentScenario==='market'){
+        response=handleMarket();
+        setQuickReplies(['Specific neighborhood?','Price trends?','Inventory levels?','Best time to buy?']);
+      } else {
+        const intent=detectIntent(userMsg);
+        response=intent?intent.handler(userMsg):handleDefault(userMsg);
+        setQuickReplies(getQuickReplies(intent?intent.name:null));
+      }
+      addMessage(response, false);
+      conversationHistory.push({role:'ai',text:response});
+    },1200);
+  },800);
+}
+
+// ===== Speech =====
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=1; utter.pitch=1;
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=voices.find(v=>v.lang.startsWith('en')&&v.name.includes('Female'))||voices.find(v=>v.lang.startsWith('en'))||voices[0];
+  if(preferred) utter.voice=preferred;
+  window.speechSynthesis.speak(utter);
+}
+
+function toggleMic(){
+  const btn=document.getElementById('micBtn');
+  if(isRecording){
+    stopRecording();
+    btn.classList.remove('mic-active');
+    document.getElementById('waveformContainer').classList.add('hidden');
+    cancelAnimationFrame(animFrame);
+    return;
+  }
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    addMessage('[Voice input is not supported in this browser. Please type your message.]', false, true);
+    return;
+  }
+  recognition=new SpeechRecognition();
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  recognition.lang='en-US';
+  recognition.onresult=(e)=>{
+    const transcript=e.results[0][0].transcript;
+    document.getElementById('userInput').value=transcript;
+    sendMessage();
+  };
+  recognition.onerror=()=>{ stopRecording(); btn.classList.remove('mic-active'); document.getElementById('waveformContainer').classList.add('hidden'); };
+  recognition.onend=()=>{ isRecording=false; btn.classList.remove('mic-active'); document.getElementById('waveformContainer').classList.add('hidden'); cancelAnimationFrame(animFrame); };
+  recognition.start();
+  isRecording=true;
+  btn.classList.add('mic-active');
+  startWaveform();
+}
+
+function stopRecording(){
+  if(recognition){ recognition.stop(); recognition=null; }
+  isRecording=false;
+}
+
+function startWaveform(){
+  const container=document.getElementById('waveformContainer');
+  container.classList.remove('hidden');
+  const canvas=document.getElementById('waveformCanvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth*2;
+  canvas.height=96;
+
+  try{
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+      const source=audioCtx.createMediaStreamSource(stream);
+      analyser=audioCtx.createAnalyser();
+      analyser.fftSize=256;
+      source.connect(analyser);
+      drawWaveform(ctx, canvas);
+    }).catch(()=>{drawFakeWaveform(ctx,canvas);});
+  }catch(e){drawFakeWaveform(ctx,canvas);}
+}
+
+function drawWaveform(ctx, canvas){
+  const bufferLength=analyser.frequencyBinCount;
+  const dataArray=new Uint8Array(bufferLength);
+  function draw(){
+    animFrame=requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+    ctx.fillStyle='rgba(10,14,39,0.3)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const barWidth=(canvas.width/bufferLength)*2.5;
+    let x=0;
+    for(let i=0;i<bufferLength;i++){
+      const barHeight=(dataArray[i]/255)*canvas.height*0.8;
+      const gradient=ctx.createLinearGradient(0,canvas.height,0,canvas.height-barHeight);
+      gradient.addColorStop(0,'#06b6d4');gradient.addColorStop(1,'#6366f1');
+      ctx.fillStyle=gradient;
+      ctx.fillRect(x,canvas.height-barHeight,barWidth-1,barHeight);
+      x+=barWidth;
+    }
+  }
+  draw();
+}
+
+function drawFakeWaveform(ctx, canvas){
+  function draw(){
+    animFrame=requestAnimationFrame(draw);
+    ctx.fillStyle='rgba(10,14,39,0.3)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const bars=40;
+    const barWidth=canvas.width/bars;
+    for(let i=0;i<bars;i++){
+      const h=Math.random()*canvas.height*0.6+10;
+      const gradient=ctx.createLinearGradient(0,canvas.height,0,canvas.height-h);
+      gradient.addColorStop(0,'#06b6d4');gradient.addColorStop(1,'#6366f1');
+      ctx.fillStyle=gradient;
+      ctx.fillRect(i*barWidth,canvas.height-h,barWidth-2,h);
+    }
+  }
+  draw();
+}
+
+// ===== Form Handling =====
+document.getElementById('configForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  companyConfig={
+    name: document.getElementById('companyName').value.trim(),
+    subtype: document.getElementById('industrySubtype').value,
+    useCase: document.getElementById('useCase').value,
+    tone: document.getElementById('voiceTone').value,
+    services: document.getElementById('keyServices').value.trim() || null,
+    hours: document.getElementById('businessHours').value.trim() || null,
+    greeting: document.getElementById('customGreeting').value.trim() || null
+  };
+  document.getElementById('customizeSection').classList.add('hidden');
+  document.getElementById('simulatorSection').classList.remove('hidden');
+  document.getElementById('simTitle').textContent=companyConfig.name+' \u2014 Voice AI Demo';
+
+  const greeting=companyConfig.greeting || `Thank you for calling ${companyConfig.name}. How can I help you with your real estate needs today?`;
+  addMessage(greeting, false);
+  conversationHistory.push({role:'ai',text:greeting});
+  setQuickReplies(['Search properties','Schedule a viewing','Mortgage info','Sell my home']);
+});
+
+function resetDemo(){
+  document.getElementById('simulatorSection').classList.add('hidden');
+  document.getElementById('customizeSection').classList.remove('hidden');
+  document.getElementById('chatMessages').innerHTML='';
+  document.getElementById('quickReplies').innerHTML='';
+  conversationHistory=[];
+  companyConfig={};
+  window.speechSynthesis && window.speechSynthesis.cancel();
+}
+
+// Pre-load voices
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged=()=>{ speechSynthesis.getVoices(); }; }
+</script>
+</body>
+</html>
