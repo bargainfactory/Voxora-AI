@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Voxora AI E-commerce Voice AI — PCI DSS Level 1 compliant order tracking, returns, product recommendations, and multilingual customer support."/>
+<title>E-commerce Voice AI — Voxora AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63'},accent:{400:'#818cf8',500:'#6366f1',600:'#4f46e5'}},fontFamily:{sans:['"Inter"','system-ui','sans-serif']}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.dark body{background:#0a0e27;color:#e2e8f0}
+::selection{background:rgba(6,182,212,0.3)}
+.glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}
+.glass-card{background:rgba(15,23,42,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem;transition:all .3s ease}
+.glass-card:hover{border-color:rgba(6,182,212,0.3);transform:translateY(-2px)}
+.gradient-text{background:linear-gradient(135deg,#06b6d4,#6366f1,#06b6d4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.animate-fade-up{animation:fade-up .6s ease both}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2)}50%{box-shadow:0 0 40px rgba(6,182,212,0.4)}}
+.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.animate-float{animation:float 6s ease-in-out infinite}
+:focus-visible{outline:2px solid #06b6d4;outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.3);border-radius:4px}
+</style>
+</head>
+<body class="dark:bg-[#0a0e27] bg-slate-50 dark:text-slate-200 text-slate-800 font-sans">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:z-[9999] focus:bg-brand-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 glass shadow-lg" role="navigation" aria-label="Main navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 lg:h-20">
+<a href="index.html" class="flex items-center gap-2" aria-label="Voxora AI Home">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center animate-pulse-glow">
+<svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="text-xl font-bold gradient-text">Voxora AI</span>
+</a>
+<div class="hidden lg:flex items-center gap-1">
+<div class="relative group">
+<button class="px-3 py-2 text-sm font-medium text-brand-400 border-b-2 border-brand-400 rounded-none flex items-center gap-1">
+Solutions
+<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+<div class="glass-card p-4 min-w-[220px]">
+<a href="healthcare.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Healthcare</a>
+<a href="real-estate.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Real Estate</a>
+<a href="ecommerce.html" class="block px-3 py-2 text-sm rounded-lg bg-brand-500/10 text-brand-400 transition">E-commerce</a>
+<a href="professional.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Professional Services</a>
+<a href="insurance.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Insurance</a>
+</div>
+</div>
+</div>
+<a href="features.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Features</a>
+<a href="how-it-works.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">How It Works</a>
+<a href="ethics.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Ethics &amp; Bias</a>
+<a href="security.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Security</a>
+<a href="pricing.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Pricing</a>
+<a href="resources.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Resources</a>
+</div>
+<div class="flex items-center gap-2">
+<a href="demo.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300">Book Demo</a>
+<a href="login.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl border dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all">Login</a>
+</div>
+</div>
+</div>
+</nav>
+
+<main id="main-content" class="pt-24 lg:pt-32">
+
+<!-- ===== HERO ===== -->
+<section class="py-16 lg:py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#101845] to-[#0a0e27]"></div>
+<div class="absolute top-20 right-20 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-10 left-10 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">PCI DSS Level 1</span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+<span class="gradient-text">E-commerce Voice AI</span>
+</h1>
+<p class="text-lg dark:text-slate-400 text-slate-600 mb-8 leading-relaxed">Order tracking, returns, product recommendations, and payment support -- with PCI-compliant security and consistent, multilingual service quality for every customer.</p>
+<div class="flex flex-wrap gap-4 mb-8">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+Book E-commerce Demo
+</a>
+<a href="solutions.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">All Solutions</a>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1.5 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">PCI DSS Level 1</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium">Shopify Integration</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">WooCommerce Integration</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">Multi-Currency</span>
+</div>
+</div>
+<div class="relative animate-float">
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-brand-500 flex items-center justify-center text-2xl">🛒</div>
+<div>
+<p class="font-semibold">Customer Support Active</p>
+<p class="text-xs text-slate-400">PCI Secure Channel</p>
+</div>
+<div class="ml-auto flex gap-1">
+<div class="w-2 h-6 bg-brand-400 rounded-full animate-pulse"></div>
+<div class="w-2 h-8 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.1s"></div>
+<div class="w-2 h-5 bg-accent-400 rounded-full animate-pulse" style="animation-delay:0.2s"></div>
+<div class="w-2 h-9 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.3s"></div>
+<div class="w-2 h-4 bg-accent-400 rounded-full animate-pulse" style="animation-delay:0.4s"></div>
+</div>
+</div>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Customer:</span> "I want to check on order #ORD-78234."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "Your order #ORD-78234 is out for delivery! It includes the wireless headphones and phone case. Expected arrival today by 6 PM. Would you like real-time tracking updates via text?"</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-xs text-emerald-400">
+<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+<span>PCI DSS Level 1 encryption active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="py-16 relative">
+<div class="absolute inset-0 bg-gradient-to-r from-brand-500/5 via-accent-500/5 to-brand-500/5"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="glass-card p-6 text-center animate-fade-up">
+<p class="text-3xl lg:text-4xl font-black gradient-text">68%</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Support Cost Reduction</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.1s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">4.8s</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Avg. Resolution Time</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.2s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">15+</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Languages Supported</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.3s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">92%</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">First-Call Resolution</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== CORE FEATURES ===== -->
+<section class="py-20 lg:py-28">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Core Capabilities</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">E-commerce Support, Reimagined</h2>
+<p class="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">Handle order inquiries, process returns, recommend products, and support payments -- all through natural voice conversations in any language.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 animate-fade-up">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">📦</div>
+<h3 class="text-xl font-bold mb-3">Order Tracking</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Real-time order status updates with carrier tracking integration. Proactively notifies customers of delays and provides estimated delivery windows in their preferred language.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">🔄</div>
+<h3 class="text-xl font-bold mb-3">Returns &amp; Exchanges</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Fully automated return initiation, label generation, and refund tracking. Handles exchange requests by checking inventory and suggesting alternatives when items are out of stock.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">🎁</div>
+<h3 class="text-xl font-bold mb-3">Product Recommendations</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">AI-powered product suggestions based on purchase history and stated preferences -- never on demographic assumptions. Bias-free recommendations that boost AOV ethically.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-brand-500/20 flex items-center justify-center mb-6 text-2xl">🔒</div>
+<h3 class="text-xl font-bold mb-3">PCI DSS Level 1</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Highest level of payment card security. Secure payment processing, tokenized card data, and encrypted transactions. Never stores raw card numbers.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.4s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">💱</div>
+<h3 class="text-xl font-bold mb-3">Multi-Currency Support</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Automatic currency detection and conversion. Quotes prices in the customer's local currency with real-time exchange rates. Supports 40+ currencies globally.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.5s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">🔗</div>
+<h3 class="text-xl font-bold mb-3">Platform Integrations</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Native integrations with Shopify, WooCommerce, BigCommerce, and Magento. One-click setup with automatic product catalog sync and inventory updates.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== SAMPLE INTERACTION ===== -->
+<section class="py-20 lg:py-28 relative">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/5 to-transparent"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Live Interaction</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Multilingual Order Support in Action</h2>
+<p class="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">See how Voxora handles complex multi-step customer requests seamlessly across languages with consistent quality.</p>
+</div>
+<div class="max-w-3xl mx-auto">
+<div class="glass-card p-8 rounded-2xl animate-fade-up">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+<p class="text-sm font-semibold text-emerald-400">Live Support Call -- PCI Secure Channel</p>
+</div>
+<div class="space-y-4 text-sm">
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">Customer (French):</span>
+<p class="mt-1">"Bonjour, je voudrais savoir ou est ma commande numero 45678, et aussi retourner un article."</p>
+<p class="mt-1 text-xs text-slate-500 italic">[Hello, I'd like to know where my order #45678 is, and also return an item.]</p>
+</div>
+<div class="glass-card p-4 rounded-lg border-brand-500/20">
+<span class="text-accent-400 font-medium">Voxora AI (responds in French):</span>
+<p class="mt-1">"Bonjour! Votre commande #45678 a ete expediee hier et arrivera jeudi avant 17h. Le numero de suivi est DHL-EU-334521. Pour le retour, quel article souhaitez-vous retourner?"</p>
+<p class="mt-1 text-xs text-slate-500 italic">[Hello! Your order #45678 was shipped yesterday and will arrive Thursday before 5 PM. Tracking: DHL-EU-334521. For the return, which item would you like to return?]</p>
+</div>
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">Customer:</span>
+<p class="mt-1">"Le pull bleu, taille M. Il est trop petit."</p>
+<p class="mt-1 text-xs text-slate-500 italic">[The blue sweater, size M. It's too small.]</p>
+</div>
+<div class="glass-card p-4 rounded-lg border-brand-500/20">
+<span class="text-accent-400 font-medium">Voxora AI:</span>
+<p class="mt-1">"Je comprends. J'ai cree une etiquette de retour gratuite pour le pull bleu -- elle sera envoyee a votre email. Souhaitez-vous un echange en taille L? Nous l'avons en stock et il arriverait lundi. Le remboursement de 49,99 EUR sera traite sous 3-5 jours apres reception."</p>
+<p class="mt-1 text-xs text-slate-500 italic">[I understand. I've created a free return label for the blue sweater -- it will be sent to your email. Would you like an exchange in size L? We have it in stock and it would arrive Monday. The 49.99 EUR refund will process within 3-5 days of receipt.]</p>
+</div>
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">System Log:</span>
+<p class="mt-1 font-mono text-xs text-slate-400">Language: French (auto-detected) | Currency: EUR | Return Label: Generated | Exchange: Size L available | Shopify Order Updated | CSAT Predicted: 9.1/10</p>
+</div>
+</div>
+<div class="mt-6 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+<div class="flex items-start gap-3">
+<svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+<div>
+<p class="text-sm font-semibold text-emerald-400">Multilingual Quality Verified</p>
+<p class="text-xs text-slate-400 mt-1">Same resolution speed, courtesy level, and policy application in French as in any other language. Auto-detected language, local currency, and regional shipping carrier. No quality degradation for non-English speakers.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== INTEGRATIONS ===== -->
+<section class="py-20 lg:py-28">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Integrations</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Works With Your Stack</h2>
+<p class="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">Plug into your existing e-commerce platform in minutes, not months.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-6 text-center animate-fade-up">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400/20 to-green-600/20 flex items-center justify-center mx-auto mb-4 text-3xl">🟢</div>
+<h3 class="font-bold mb-2">Shopify</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">One-click install from the Shopify App Store. Full order, inventory, and customer sync.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.1s">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-400/20 to-purple-600/20 flex items-center justify-center mx-auto mb-4 text-3xl">🟣</div>
+<h3 class="font-bold mb-2">WooCommerce</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">WordPress plugin with REST API integration. Syncs products, orders, and customer data.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.2s">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400/20 to-blue-600/20 flex items-center justify-center mx-auto mb-4 text-3xl">🔵</div>
+<h3 class="font-bold mb-2">BigCommerce</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Native API connector with webhook support for real-time order status updates.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.3s">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400/20 to-orange-600/20 flex items-center justify-center mx-auto mb-4 text-3xl">🟠</div>
+<h3 class="font-bold mb-2">Magento</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Adobe Commerce integration with full catalog access and multi-store support.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="py-20 lg:py-28 relative">
+<div class="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-accent-500/5 to-brand-500/10"></div>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center animate-fade-up">
+<h2 class="text-3xl md:text-4xl font-black mb-6">
+<span class="gradient-text">Scale Customer Support Without Scaling Costs</span>
+</h2>
+<p class="text-lg dark:text-slate-400 text-slate-600 mb-8 max-w-2xl mx-auto">Deploy PCI-compliant voice AI that handles orders, returns, and recommendations in 15+ languages -- 24/7, 365 days a year.</p>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+Book E-commerce Demo
+</a>
+<a href="pricing.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">View Pricing</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t dark:border-slate-800 border-slate-200 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center">
+<svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="font-bold gradient-text">Voxora AI</span>
+</div>
+<div class="flex flex-wrap gap-6 text-sm dark:text-slate-400 text-slate-500">
+<a href="index.html" class="hover:text-brand-400 transition-colors">Home</a>
+<a href="ethics.html" class="hover:text-brand-400 transition-colors">Ethics Charter</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Accessibility</a>
+</div>
+<p class="text-sm dark:text-slate-500 text-slate-400">&copy; 2026 Voxora AI. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

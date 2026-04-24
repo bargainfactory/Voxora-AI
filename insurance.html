@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Voxora AI Insurance Voice AI — Bias-free claims intake, FNOL automation, policy inquiries, and quote generation with SOC 2 compliance and Guidewire/Duck Creek integration."/>
+<title>Insurance Voice AI — Voxora AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63'},accent:{400:'#818cf8',500:'#6366f1',600:'#4f46e5'}},fontFamily:{sans:['"Inter"','system-ui','sans-serif']}}}};</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.dark body{background:#0a0e27;color:#e2e8f0}
+::selection{background:rgba(6,182,212,0.3)}
+.glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}
+.glass-card{background:rgba(15,23,42,0.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem;transition:all .3s ease}
+.glass-card:hover{border-color:rgba(6,182,212,0.3);transform:translateY(-2px)}
+.gradient-text{background:linear-gradient(135deg,#06b6d4,#6366f1,#06b6d4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.animate-fade-up{animation:fade-up .6s ease both}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(6,182,212,0.2)}50%{box-shadow:0 0 40px rgba(6,182,212,0.4)}}
+.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.animate-float{animation:float 6s ease-in-out infinite}
+:focus-visible{outline:2px solid #06b6d4;outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(6,182,212,0.3);border-radius:4px}
+</style>
+</head>
+<body class="dark:bg-[#0a0e27] bg-slate-50 dark:text-slate-200 text-slate-800 font-sans">
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:z-[9999] focus:bg-brand-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 glass shadow-lg" role="navigation" aria-label="Main navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 lg:h-20">
+<a href="index.html" class="flex items-center gap-2" aria-label="Voxora AI Home">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center animate-pulse-glow">
+<svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="text-xl font-bold gradient-text">Voxora AI</span>
+</a>
+<div class="hidden lg:flex items-center gap-1">
+<div class="relative group">
+<button class="px-3 py-2 text-sm font-medium text-brand-400 border-b-2 border-brand-400 rounded-none flex items-center gap-1">
+Solutions
+<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+<div class="glass-card p-4 min-w-[220px]">
+<a href="healthcare.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Healthcare</a>
+<a href="real-estate.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Real Estate</a>
+<a href="ecommerce.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">E-commerce</a>
+<a href="professional.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition">Professional Services</a>
+<a href="insurance.html" class="block px-3 py-2 text-sm rounded-lg bg-brand-500/10 text-brand-400 transition">Insurance</a>
+</div>
+</div>
+</div>
+<a href="features.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Features</a>
+<a href="how-it-works.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">How It Works</a>
+<a href="ethics.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Ethics &amp; Bias</a>
+<a href="security.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Security</a>
+<a href="pricing.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Pricing</a>
+<a href="resources.html" class="px-3 py-2 text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-brand-400 transition-colors rounded-lg">Resources</a>
+</div>
+<div class="flex items-center gap-2">
+<a href="demo.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all duration-300">Book Demo</a>
+<a href="login.html" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl border dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all">Login</a>
+</div>
+</div>
+</div>
+</nav>
+
+<main id="main-content" class="pt-24 lg:pt-32">
+
+<!-- ===== HERO ===== -->
+<section class="py-16 lg:py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-[#0a0e27] via-[#0e1538] to-[#0a0e27]"></div>
+<div class="absolute top-20 right-10 w-72 h-72 bg-brand-500/10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-10 left-20 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">SOC 2 Certified</span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+<span class="gradient-text">Insurance Voice AI</span>
+</h1>
+<p class="text-lg dark:text-slate-400 text-slate-600 mb-8 leading-relaxed">Claims intake, policy inquiries, quote generation, and FNOL automation -- with bias-free risk assessment communication and fair treatment for every policyholder.</p>
+<div class="flex flex-wrap gap-4 mb-8">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+Book Insurance Demo
+</a>
+<a href="solutions.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">All Solutions</a>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1.5 text-xs rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">SOC 2 Type II</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">Guidewire Integration</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium">Duck Creek Integration</span>
+<span class="px-3 py-1.5 text-xs rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">Bias-Free Assessment</span>
+</div>
+</div>
+<div class="relative animate-float">
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-brand-500 flex items-center justify-center text-2xl">🛡️</div>
+<div>
+<p class="font-semibold">Claims Intake Active</p>
+<p class="text-xs text-slate-400">SOC 2 Secure Channel</p>
+</div>
+<div class="ml-auto flex gap-1">
+<div class="w-2 h-6 bg-brand-400 rounded-full animate-pulse"></div>
+<div class="w-2 h-8 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.1s"></div>
+<div class="w-2 h-5 bg-accent-400 rounded-full animate-pulse" style="animation-delay:0.2s"></div>
+<div class="w-2 h-9 bg-brand-400 rounded-full animate-pulse" style="animation-delay:0.3s"></div>
+<div class="w-2 h-4 bg-accent-400 rounded-full animate-pulse" style="animation-delay:0.4s"></div>
+</div>
+</div>
+<div class="space-y-3 text-sm">
+<div class="glass-card p-3 rounded-lg"><span class="text-brand-400 font-medium">Policyholder:</span> "I was in a car accident and need to file a claim."</div>
+<div class="glass-card p-3 rounded-lg border-brand-500/20"><span class="text-accent-400 font-medium">Voxora:</span> "I'm sorry to hear about your accident. I hope you're safe. Let me guide you through the FNOL process. First, can you tell me when and where the accident occurred?"</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-xs text-emerald-400">
+<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+<span>Bias-free claims processing active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="py-16 relative">
+<div class="absolute inset-0 bg-gradient-to-r from-brand-500/5 via-accent-500/5 to-brand-500/5"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="glass-card p-6 text-center animate-fade-up">
+<p class="text-3xl lg:text-4xl font-black gradient-text">60%</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Faster Claims Intake</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.1s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">30K+</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Claims Processed</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.2s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">0</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">Bias Complaints</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.3s">
+<p class="text-3xl lg:text-4xl font-black gradient-text">95%</p>
+<p class="text-sm dark:text-slate-400 text-slate-600 mt-2">FNOL Completion Rate</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== CORE FEATURES ===== -->
+<section class="py-20 lg:py-28">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Core Capabilities</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Insurance Operations, Automated Fairly</h2>
+<p class="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">From first notice of loss to policy renewal -- voice AI that processes claims fairly, generates quotes accurately, and serves every policyholder equally.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 animate-fade-up">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">📋</div>
+<h3 class="text-xl font-bold mb-3">Claims Intake</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Guided claims filing with structured data capture for auto, home, health, and commercial lines. Collects incident details, photos references, and witness information systematically.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">⚡</div>
+<h3 class="text-xl font-bold mb-3">FNOL Automation</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">First Notice of Loss processing in under 5 minutes. Captures all required ACORD fields, assigns claim numbers instantly, and routes to the appropriate adjuster based on claim type and severity.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-brand-500/20 flex items-center justify-center mb-6 text-2xl">⚖️</div>
+<h3 class="text-xl font-bold mb-3">Bias-Free Risk Assessment</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">All risk communication is based solely on policy data and claim facts -- never on caller demographics, accent, or perceived background. Audited for fairness in every interaction.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">📊</div>
+<h3 class="text-xl font-bold mb-3">Policy Inquiries</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Instant answers to coverage questions, deductible amounts, policy limits, and exclusions. Explains complex policy language in plain terms, in the caller's preferred language.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.4s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">💰</div>
+<h3 class="text-xl font-bold mb-3">Quote Generation</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Real-time quote generation for auto, home, renters, and commercial policies. Gathers risk factors through natural conversation and presents competitive options with clear comparisons.</p>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.5s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mb-6 text-2xl">🔗</div>
+<h3 class="text-xl font-bold mb-3">Core System Integration</h3>
+<p class="dark:text-slate-400 text-slate-600 text-sm leading-relaxed">Native connectors for Guidewire, Duck Creek, Majesco, and Applied Epic. Bi-directional sync for policy data, claims, and billing with real-time updates.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== SAMPLE INTERACTION ===== -->
+<section class="py-20 lg:py-28 relative">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/5 to-transparent"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Live Interaction</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Fair Claims Processing in Action</h2>
+<p class="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">See how Voxora processes claims with identical care and urgency for every policyholder, regardless of background.</p>
+</div>
+<div class="max-w-3xl mx-auto">
+<div class="glass-card p-8 rounded-2xl animate-fade-up">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+<p class="text-sm font-semibold text-emerald-400">Live FNOL Call -- SOC 2 Secure Channel</p>
+</div>
+<div class="space-y-4 text-sm">
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">Policyholder:</span>
+<p class="mt-1">"Hi, there was a bad storm last night and a tree fell on my roof. I need to file a claim."</p>
+</div>
+<div class="glass-card p-4 rounded-lg border-brand-500/20">
+<span class="text-accent-400 font-medium">Voxora AI:</span>
+<p class="mt-1">"I'm sorry to hear about the storm damage. Let me help you file a homeowner's claim right away. First, is everyone in the household safe? And is the home currently habitable?"</p>
+<div class="mt-2 px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs inline-block">FNOL Process Initiated</div>
+</div>
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">Policyholder:</span>
+<p class="mt-1">"Yes, everyone is fine. There's a hole in the roof over the guest bedroom though. Rain is coming in."</p>
+</div>
+<div class="glass-card p-4 rounded-lg border-brand-500/20">
+<span class="text-accent-400 font-medium">Voxora AI:</span>
+<p class="mt-1">"I'm glad everyone is safe. I've created claim #HO-2026-7293 for storm damage to your roof. Given the active water intrusion, I'm flagging this as urgent and dispatching an emergency mitigation company to tarp the roof today. Your policy covers emergency repairs up to $5,000 without prior approval."</p>
+</div>
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">Policyholder:</span>
+<p class="mt-1">"That's a relief. What about the water damage to the bedroom?"</p>
+</div>
+<div class="glass-card p-4 rounded-lg border-brand-500/20">
+<span class="text-accent-400 font-medium">Voxora AI:</span>
+<p class="mt-1">"Your homeowner's policy covers both the structural damage and interior water damage. Your deductible is $1,000. A field adjuster will contact you within 24 hours to schedule an inspection. In the meantime, please take photos of all damage -- I'll send a secure upload link to your phone. Do you need temporary housing arrangements?"</p>
+</div>
+<div class="glass-card p-4 rounded-lg">
+<span class="text-brand-400 font-medium">System Log:</span>
+<p class="mt-1 font-mono text-xs text-slate-400">Claim: HO-2026-7293 | Type: Storm/Wind | Urgency: HIGH (active water intrusion) | Mitigation: Dispatched | Adjuster Assignment: Field - 24hr | Bias Check: PASSED | Demographic Factors: NONE | Guidewire Updated: Yes</p>
+</div>
+</div>
+<div class="mt-6 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+<div class="flex items-start gap-3">
+<svg class="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+<div>
+<p class="text-sm font-semibold text-emerald-400">Fair Claims Processing Verified</p>
+<p class="text-xs text-slate-400 mt-1">Claim urgency determined solely by damage severity and safety risk (active water intrusion). Emergency mitigation dispatched based on claim facts, not caller demographics. Identical response protocol applied across all policyholders. SOC 2 audit trail maintained.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== LINES OF BUSINESS ===== -->
+<section class="py-20 lg:py-28">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">Lines of Business</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Coverage Across All Lines</h2>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-6 text-center animate-fade-up">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">🚗</div>
+<h3 class="font-bold mb-2">Auto Insurance</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Accident claims, glass repair, roadside assistance, and coverage changes. Integrates with telematics data.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">🏠</div>
+<h3 class="font-bold mb-2">Homeowners</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Property damage, liability, theft, and natural disaster claims. Emergency mitigation dispatch built in.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">🏢</div>
+<h3 class="font-bold mb-2">Commercial</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Workers' comp, general liability, BOP, and commercial property. Handles complex multi-party claims.</p>
+</div>
+<div class="glass-card p-6 text-center animate-fade-up" style="animation-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400/20 to-accent-500/20 flex items-center justify-center mx-auto mb-4 text-2xl">❤️</div>
+<h3 class="font-bold mb-2">Life &amp; Health</h3>
+<p class="text-xs dark:text-slate-400 text-slate-600">Benefits inquiries, provider network lookups, claims status, and enrollment support with HIPAA compliance.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== COMPLIANCE SECTION ===== -->
+<section class="py-20 lg:py-28 relative">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-accent-500/5 to-transparent"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center mb-16 animate-fade-up">
+<span class="inline-block px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">Compliance &amp; Security</span>
+<h2 class="text-3xl md:text-4xl font-black mb-4">Insurance-Grade Security</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="glass-card p-8 animate-fade-up">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-3">
+<svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+SOC 2 Type II Certified
+</h3>
+<ul class="space-y-3 text-sm dark:text-slate-400 text-slate-600">
+<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span> Annual third-party security audits</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span> Continuous monitoring and alerting</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span> Data encryption at rest and in transit</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span> Access controls with MFA enforcement</li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span> Incident response and breach notification</li>
+</ul>
+</div>
+<div class="glass-card p-8 animate-fade-up" style="animation-delay:0.1s">
+<h3 class="text-xl font-bold mb-4 flex items-center gap-3">
+<svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+Regulatory Compliance
+</h3>
+<ul class="space-y-3 text-sm dark:text-slate-400 text-slate-600">
+<li class="flex items-start gap-2"><span class="text-blue-400">&#10003;</span> State insurance department compliance</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">&#10003;</span> NAIC data security model law alignment</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">&#10003;</span> ACORD data standards compliance</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">&#10003;</span> Fair claims settlement practices</li>
+<li class="flex items-start gap-2"><span class="text-blue-400">&#10003;</span> Anti-discrimination audit logging</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="py-20 lg:py-28 relative">
+<div class="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-accent-500/5 to-brand-500/10"></div>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center animate-fade-up">
+<h2 class="text-3xl md:text-4xl font-black mb-6">
+<span class="gradient-text">Modernize Claims Processing with Fair AI</span>
+</h2>
+<p class="text-lg dark:text-slate-400 text-slate-600 mb-8 max-w-2xl mx-auto">Deploy SOC 2 certified voice AI that processes claims faster, generates quotes accurately, and treats every policyholder with equal care -- 24/7.</p>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="demo.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 text-white shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+Book Insurance Demo
+</a>
+<a href="pricing.html" class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold rounded-2xl border-2 dark:border-slate-600 border-slate-300 hover:border-brand-400 transition-all duration-300 hover:-translate-y-1">View Pricing</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t dark:border-slate-800 border-slate-200 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-400 to-accent-500 flex items-center justify-center">
+<svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 18.5c4.5 0 7-3 7-6.5S16.5 5.5 12 5.5 5 8.5 5 12s2.5 6.5 7 6.5z"/><circle cx="12" cy="12" r="2.5"/></svg>
+</div>
+<span class="font-bold gradient-text">Voxora AI</span>
+</div>
+<div class="flex flex-wrap gap-6 text-sm dark:text-slate-400 text-slate-500">
+<a href="index.html" class="hover:text-brand-400 transition-colors">Home</a>
+<a href="ethics.html" class="hover:text-brand-400 transition-colors">Ethics Charter</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a>
+<a href="#" class="hover:text-brand-400 transition-colors">Accessibility</a>
+</div>
+<p class="text-sm dark:text-slate-500 text-slate-400">&copy; 2026 Voxora AI. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

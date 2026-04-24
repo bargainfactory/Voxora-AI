@@ -117,11 +117,11 @@ Solutions
 </button>
 <div class="absolute top-full start-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
 <div class="glass-card p-4 min-w-[220px]">
-<a href="solutions.html#healthcare" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navHealthcare">Healthcare</a>
-<a href="solutions.html#real-estate" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navRealEstate">Real Estate</a>
-<a href="solutions.html#ecommerce" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navEcommerce">E-commerce</a>
-<a href="solutions.html#professional" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navProfServices">Professional Services</a>
-<a href="solutions.html#insurance" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navInsurance">Insurance</a>
+<a href="healthcare.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navHealthcare">Healthcare</a>
+<a href="real-estate.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navRealEstate">Real Estate</a>
+<a href="ecommerce.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navEcommerce">E-commerce</a>
+<a href="professional.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navProfServices">Professional Services</a>
+<a href="insurance.html" class="block px-3 py-2 text-sm rounded-lg hover:bg-brand-500/10 transition" data-i18n="navInsurance">Insurance</a>
 </div>
 </div>
 </div>
@@ -716,7 +716,23 @@ Book Demo
 <div class="text-2xl font-mono font-bold mb-4" id="callTimer">00:00</div>
 
 <!-- Transcript -->
-<div id="callTranscript" class="glass-card p-4 rounded-lg mb-4 text-start max-h-40 overflow-y-auto text-sm space-y-2" aria-live="polite" aria-label="Call transcript">
+<div id="callTranscript" class="glass-card p-4 rounded-lg mb-4 text-start max-h-48 overflow-y-auto text-sm space-y-2" aria-live="polite" aria-label="Call transcript">
+</div>
+
+<!-- Typing Indicator -->
+<div id="typingIndicator" class="hidden mb-3 flex items-center gap-2 text-xs dark:text-slate-400 text-slate-500">
+<span class="text-accent-400 font-semibold">Voxora</span>
+<span class="flex gap-1"><span class="w-1.5 h-1.5 rounded-full bg-accent-400 animate-bounce" style="animation-delay:0s"></span><span class="w-1.5 h-1.5 rounded-full bg-accent-400 animate-bounce" style="animation-delay:0.15s"></span><span class="w-1.5 h-1.5 rounded-full bg-accent-400 animate-bounce" style="animation-delay:0.3s"></span></span>
+<span>is thinking...</span>
+</div>
+
+<!-- User Input -->
+<div id="userInputWrap" class="mb-4">
+<form id="chatForm" onsubmit="handleUserMessage(event)" class="flex gap-2">
+<input type="text" id="userInput" class="flex-1 px-4 py-2.5 rounded-xl dark:bg-slate-800/60 bg-white border dark:border-slate-700 border-slate-200 focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all text-sm" placeholder="Type your message to Voxora AI..." autocomplete="off"/>
+<button type="submit" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold hover:shadow-lg hover:shadow-brand-500/25 transition-all text-sm shrink-0">Send</button>
+</form>
+<div class="flex flex-wrap gap-2 mt-2" id="quickReplies"></div>
 </div>
 
 <!-- Controls -->
@@ -1399,7 +1415,7 @@ function speakSSML(text, langCode) {
 }
 
 // ==========================================
-// WEBRTC + WEB AUDIO CALL SIMULATOR
+// SMART INTERACTIVE CALL SIMULATOR
 // ==========================================
 let callState = 'idle';
 let callTimerInterval = null;
@@ -1411,22 +1427,230 @@ let micStream = null;
 let userWaveformBars = [];
 let agentWaveformBars = [];
 let animFrame = null;
-let scriptIndex = 0;
 let isMuted = false;
 let isOnHold = false;
+let conversationContext = { industry: null, name: null, discussed: [], messageCount: 0, sentiment: 'neutral' };
 
-const callScript = [
-  {role:'agent',textKey:'simDisclosure'},
-  {role:'agent',text:'Hello! Thank you for calling Voxora AI. How can I assist you today?'},
-  {role:'user',text:'I\'d like to learn about your voice AI platform for my business.'},
-  {role:'agent',text:'I\'d be happy to help! Voxora AI provides autonomous voice agents for inbound calls, supporting 9 languages with built-in bias mitigation. What industry are you in?'},
-  {role:'user',text:'We\'re in healthcare. We need HIPAA compliance.'},
-  {role:'agent',text:'Excellent choice. Our healthcare solution is fully HIPAA-compliant with encrypted call handling, appointment scheduling, and patient triage. We process over 100 accent datasets to ensure fair treatment for every patient. Would you like to schedule a demo?'},
-  {role:'user',text:'Yes, that sounds great.'},
-  {role:'agent',text:'Wonderful! I\'ll connect you with our healthcare team. They\'ll reach out within 24 hours. Is there anything else I can help with?'},
-  {role:'user',text:'No, that\'s all. Thank you!'},
-  {role:'agent',text:'Thank you for your interest in Voxora AI. Have a wonderful day!'}
-];
+const aiKnowledge = {
+  greeting: [
+    "Hello! Thank you for calling Voxora AI. I'm your intelligent voice assistant. How can I help you today?",
+    "Welcome to Voxora AI! I'm here to help you explore our ethical voice AI platform. What would you like to know?"
+  ],
+  healthcare: {
+    general: "Our healthcare solution is fully HIPAA-compliant with end-to-end encrypted call handling, smart appointment scheduling, prescription refill automation, and AI-powered patient triage. We support 9+ languages with 99.7% accent recognition parity — ensuring every patient receives equal care regardless of how they speak.",
+    appointments: "Our smart scheduling engine handles appointment booking, rescheduling, and cancellations 24/7. It integrates with Epic, Cerner, and other EHR systems, checks provider availability in real time, and sends automated reminders in the patient's preferred language.",
+    triage: "Our bias-mitigated triage system uses symptom assessment protocols trained on 100+ accent datasets. It assigns identical urgency scores regardless of a caller's accent, dialect, or language — verified by quarterly third-party audits with <0.3% variance across demographics.",
+    compliance: "We're fully HIPAA-compliant with BAA available, support HL7 FHIR data exchange, and maintain SOC 2 Type II certification. Voice data is AES-256 encrypted at rest and TLS 1.3 in transit, with configurable auto-deletion policies.",
+    roi: "Healthcare clients typically see 60-72% cost reduction within 90 days. MedFirst Health achieved 391% ROI with zero bias incidents across 50,000+ patient calls."
+  },
+  realestate: {
+    general: "Our real estate voice AI handles lead qualification, property inquiries, showing scheduling, and follow-ups 24/7. Every interaction is Fair Housing Act compliant — we never profile callers by accent or dialect. We integrate with major MLS systems and CRMs like Salesforce and Follow Up Boss.",
+    leads: "Our lead qualification uses smart scoring based on stated criteria — budget, timeline, property preferences — never voice characteristics. We route hot leads instantly to agents and nurture warm leads with automated multilingual follow-ups.",
+    roi: "Real estate clients see 3x more qualified leads and 156% higher conversion rates. GlobalRealty Partners went live in 48 hours and serves clients in 6 languages."
+  },
+  ecommerce: {
+    general: "We handle order tracking, returns, product recommendations, and payment processing across 15+ languages. Our PCI DSS Level 1 certified payment system supports multi-currency transactions, and we integrate natively with Shopify, WooCommerce, and BigCommerce.",
+    orders: "Customers can check order status, modify orders, and get shipping updates in their preferred language. We connect to your fulfillment system in real time and proactively notify customers of delays.",
+    returns: "Our voice AI handles the entire returns process — generates prepaid labels, processes exchanges, issues refunds — reducing return call handle time by 68% while maintaining 4.8-star satisfaction scores.",
+    roi: "E-commerce clients typically automate 80% of inbound calls with 92% first-call resolution. Average cost per call drops from $12 to under $2."
+  },
+  professional: {
+    general: "We serve law firms, accounting practices, and consulting firms with encrypted client intake, smart consultation scheduling with conflict checks, and confidential billing inquiries. Every call is AES-256 encrypted with attorney-client privilege protections built in.",
+    intake: "Our client intake flow captures case details, checks for conflicts of interest, and routes to the appropriate practice area — all while maintaining end-to-end encryption. We integrate with Clio, MyCase, and PracticePanther.",
+    roi: "Professional services clients save 65% on intake processing time while booking 40% more consultations. Zero data breaches across all deployments."
+  },
+  insurance: {
+    general: "We automate claims intake (FNOL), policy inquiries, quote generation, and renewal reminders — all with bias-free risk assessment communication. Our system processes claims with identical urgency regardless of caller demographics, verified by SOC 2 audits.",
+    claims: "Our First Notice of Loss (FNOL) automation guides policyholders through the claims process step by step, captures damage details, assigns claim numbers, and dispatches adjusters — achieving 95% completion rates and 60% faster processing.",
+    roi: "Insurance clients process claims 60% faster with zero bias complaints. SecureShield Insurance saw 65% cost savings while maintaining full GDPR and SOC 2 compliance."
+  },
+  pricing: "We offer three plans: Starter at $299/month (500 calls, 3 languages), Professional at $799/month (5,000 calls, all 9 languages, advanced bias mitigation), and Enterprise with custom pricing for unlimited scale. All plans include ethical AI features and bias monitoring. There's a 14-day free trial with no credit card required.",
+  security: "We maintain SOC 2 Type II certification with annual audits, AES-256 encryption at rest, TLS 1.3 in transit, and full GDPR/HIPAA compliance. We're EU AI Act Article 52 compliant with mandatory AI disclosure at call start. Data residency options available in US, EU, and APAC.",
+  bias: "Our Voice Bias Mitigation framework includes training on 100+ accent and dialect datasets, real-time fairness audits across demographics, explainable AI decision trails, and adaptive voice recognition using federated learning. We maintain 99.7% recognition parity with <0.3% bias variance, verified by quarterly independent audits aligned with ISO 42001.",
+  languages: "We support English, Spanish, French, German, Portuguese, Italian, Simplified Chinese, Japanese, and Arabic — with real-time language detection and switching. Our multilingual engine adapts cultural context, formal/informal registers, and industry terminology for each locale.",
+  integrations: "We integrate with 50+ platforms including Salesforce, HubSpot, Zoho CRM, Twilio, Zendesk, Slack, Stripe, Calendly, Shopify, and more. Setup typically takes under 48 hours with our guided onboarding.",
+  demo: "I'd love to arrange that! Our team will set up a personalized 30-minute walkthrough tailored to your industry. You'll see live bias mitigation, multilingual capabilities, and real-time analytics. No credit card required — just visit our demo page and we'll be in touch within 24 hours.",
+  howItWorks: "It's a simple 3-step process: First, you configure your scripts and business rules (4-8 hours). Then we run comprehensive bias audits across 100+ accent groups (12-24 hours). Finally, you go live with continuous fairness monitoring. Most businesses are fully deployed within 48 hours.",
+  fallback: [
+    "That's a great question! While I specialize in voice AI solutions, I want to make sure I give you the most accurate answer. Could you tell me a bit more about what you're looking for?",
+    "I appreciate your interest! Let me help guide you. Are you looking for information about a specific industry solution, our pricing, security features, or something else?",
+    "I want to make sure I address your needs properly. Could you rephrase that, or would you like to know about our features, pricing, or a specific industry solution?"
+  ]
+};
+
+function detectIntent(msg) {
+  const m = msg.toLowerCase();
+  const intents = [];
+
+  if (/\b(hi|hello|hey|good morning|good afternoon)\b/.test(m)) intents.push('greeting');
+  if (/\b(healthcare|medical|hospital|clinic|patient|hipaa|doctor|nurse|prescription|triage|appointment|health)\b/.test(m)) { intents.push('healthcare'); conversationContext.industry = 'healthcare'; }
+  if (/\b(real estate|property|listing|showing|house|home|apartment|realtor|realty|fair housing|mls)\b/.test(m)) { intents.push('realestate'); conversationContext.industry = 'realestate'; }
+  if (/\b(ecommerce|e-commerce|shop|store|order|return|product|shipping|cart|shopify|woocommerce)\b/.test(m)) { intents.push('ecommerce'); conversationContext.industry = 'ecommerce'; }
+  if (/\b(law|legal|attorney|lawyer|accounting|consulting|professional|firm|client intake|contract|clio)\b/.test(m)) { intents.push('professional'); conversationContext.industry = 'professional'; }
+  if (/\b(insurance|claim|policy|coverage|premium|insur|underwriting|fnol|deductible)\b/.test(m)) { intents.push('insurance'); conversationContext.industry = 'insurance'; }
+  if (/\b(price|pricing|cost|plan|how much|subscription|fee|starter|professional|enterprise)\b/.test(m)) intents.push('pricing');
+  if (/\b(secure|security|encrypt|compliance|gdpr|soc|hipaa|data protection|privacy)\b/.test(m)) intents.push('security');
+  if (/\b(bias|fair|ethic|discriminat|accent|dialect|equal|mitigat|audit)\b/.test(m)) intents.push('bias');
+  if (/\b(language|multilingual|spanish|french|german|arabic|chinese|japanese|translate|i18n)\b/.test(m)) intents.push('languages');
+  if (/\b(integrat|crm|salesforce|hubspot|connect|api|webhook|platform)\b/.test(m)) intents.push('integrations');
+  if (/\b(demo|trial|test|try|schedule|book|walkthrough|see it)\b/.test(m)) intents.push('demo');
+  if (/\b(how.*(work|start|deploy|setup|begin)|onboard|implement|get started|step)\b/.test(m)) intents.push('howItWorks');
+  if (/\b(roi|saving|save|cost reduction|reduce cost|revenue|money)\b/.test(m)) intents.push('roi');
+  if (/\b(appointment|schedule|booking|book an|reschedule|cancel appointment)\b/.test(m) && conversationContext.industry === 'healthcare') intents.push('appointments');
+  if (/\b(triage|urgency|emergency|symptom|pain)\b/.test(m) && conversationContext.industry === 'healthcare') intents.push('triage');
+  if (/\b(lead|qualify|prospect|cold call)\b/.test(m) && conversationContext.industry === 'realestate') intents.push('leads');
+  if (/\b(order|track|ship|deliver)\b/.test(m) && conversationContext.industry === 'ecommerce') intents.push('orders');
+  if (/\b(return|refund|exchange)\b/.test(m) && conversationContext.industry === 'ecommerce') intents.push('returns');
+  if (/\b(intake|confiden|encrypt)\b/.test(m) && conversationContext.industry === 'professional') intents.push('intake');
+  if (/\b(claim|file|damage|loss|fnol)\b/.test(m) && conversationContext.industry === 'insurance') intents.push('claims');
+  if (/\b(thank|thanks|bye|goodbye|that's all|no more)\b/.test(m)) intents.push('goodbye');
+  if (/\b(who are you|what are you|what is voxora|tell me about)\b/.test(m)) intents.push('about');
+
+  if (/[!]{2,}|love|amazing|great|excellent|perfect|awesome/.test(m)) conversationContext.sentiment = 'positive';
+  else if (/\?{2,}|confused|don't understand|unclear|worried|concerned/.test(m)) conversationContext.sentiment = 'confused';
+  else conversationContext.sentiment = 'neutral';
+
+  return intents.length > 0 ? intents : ['fallback'];
+}
+
+function generateResponse(intents) {
+  let parts = [];
+  let quickReplies = [];
+
+  for (const intent of intents) {
+    if (intent === 'greeting' && conversationContext.messageCount <= 1) continue;
+    if (intent === 'goodbye') {
+      return {
+        text: "Thank you so much for your interest in Voxora AI! It was wonderful speaking with you. If you'd like to explore further, visit our demo page to book a personalized walkthrough. Have a fantastic day!",
+        quickReplies: ['Book a demo', 'Learn more about pricing']
+      };
+    }
+    if (intent === 'about') {
+      parts.push("Voxora AI is the world's most advanced ethical voice AI platform for SMBs. We deliver autonomous 24/7 voice agents for inbound calls — handling lead qualification, booking, Tier-1 support, CRM updates, and payments. What makes us unique is our proactive Voice Bias Mitigation, ensuring every caller is treated equally regardless of accent or dialect.");
+      quickReplies.push('Tell me about pricing', 'Which industries?', 'How does bias mitigation work?');
+      break;
+    }
+    if (intent === 'roi') {
+      const ind = conversationContext.industry;
+      if (ind && aiKnowledge[ind]?.roi) {
+        parts.push(aiKnowledge[ind].roi);
+      } else {
+        parts.push("Our clients typically see 60-80% cost savings with 178-391% ROI. The exact numbers depend on your call volume and industry. Would you like me to walk through the ROI for a specific industry?");
+        quickReplies.push('Healthcare ROI', 'Real estate ROI', 'E-commerce ROI');
+      }
+      continue;
+    }
+
+    const industryKeys = ['healthcare','realestate','ecommerce','professional','insurance'];
+    if (industryKeys.includes(intent)) {
+      const subIntents = intents.filter(i => !industryKeys.includes(i) && i !== 'fallback' && i !== 'greeting');
+      if (subIntents.length > 0) {
+        for (const sub of subIntents) {
+          if (aiKnowledge[intent]?.[sub]) { parts.push(aiKnowledge[intent][sub]); conversationContext.discussed.push(sub); }
+        }
+      }
+      if (parts.length === 0 || !subIntents.length) {
+        parts.push(aiKnowledge[intent]?.general || '');
+        conversationContext.discussed.push(intent);
+      }
+      const subTopics = {healthcare:['appointments','triage','compliance','roi'], realestate:['leads','roi'], ecommerce:['orders','returns','roi'], professional:['intake','roi'], insurance:['claims','roi']};
+      const available = (subTopics[intent]||[]).filter(s => !conversationContext.discussed.includes(s));
+      if (available.length > 0) {
+        const labels = {appointments:'Appointment scheduling', triage:'Patient triage', compliance:'HIPAA compliance', roi:'ROI details', leads:'Lead qualification', orders:'Order tracking', returns:'Returns handling', intake:'Client intake', claims:'Claims processing'};
+        available.slice(0,3).forEach(a => quickReplies.push(labels[a]||a));
+      }
+      quickReplies.push('View pricing');
+      continue;
+    }
+
+    if (typeof aiKnowledge[intent] === 'string') {
+      parts.push(aiKnowledge[intent]);
+      conversationContext.discussed.push(intent);
+    } else if (Array.isArray(aiKnowledge[intent])) {
+      parts.push(aiKnowledge[intent][Math.floor(Math.random()*aiKnowledge[intent].length)]);
+    }
+  }
+
+  if (parts.length === 0) {
+    if (intents.includes('fallback')) {
+      parts.push(aiKnowledge.fallback[Math.floor(Math.random()*aiKnowledge.fallback.length)]);
+      quickReplies = ['Tell me about Voxora', 'See pricing', 'Healthcare solutions', 'Book a demo'];
+    }
+  }
+
+  if (conversationContext.sentiment === 'positive' && parts.length > 0) {
+    parts[0] = "I'm glad you're interested! " + parts[0];
+  } else if (conversationContext.sentiment === 'confused' && parts.length > 0) {
+    parts[0] = "Let me clarify that for you. " + parts[0];
+  }
+
+  if (quickReplies.length === 0) {
+    if (!conversationContext.discussed.includes('demo')) quickReplies.push('Book a demo');
+    if (!conversationContext.discussed.includes('pricing')) quickReplies.push('View pricing');
+    if (!conversationContext.industry) quickReplies.push('Healthcare', 'Real Estate', 'E-commerce');
+  }
+
+  return { text: parts.join(' '), quickReplies: [...new Set(quickReplies)].slice(0,4) };
+}
+
+function addTranscriptMessage(role, text) {
+  const transcript = document.getElementById('callTranscript');
+  const div = document.createElement('div');
+  div.className = 'glass-card p-2 rounded-lg text-xs animate-fade-up';
+  div.style.animationDuration = '0.3s';
+  if (role === 'agent') {
+    div.innerHTML = `<span class="text-accent-400 font-semibold">Voxora:</span> ${sanitize(text)}`;
+  } else if (role === 'user') {
+    div.innerHTML = `<span class="text-brand-400 font-semibold">You:</span> ${sanitize(text)}`;
+  } else {
+    div.innerHTML = `<span class="text-amber-400 font-semibold italic text-[10px]">${sanitize(text)}</span>`;
+  }
+  transcript.appendChild(div);
+  transcript.scrollTop = transcript.scrollHeight;
+}
+
+function showQuickReplies(replies) {
+  const wrap = document.getElementById('quickReplies');
+  wrap.innerHTML = '';
+  replies.forEach(r => {
+    const btn = document.createElement('button');
+    btn.className = 'px-3 py-1 text-xs rounded-full border dark:border-slate-600 border-slate-300 hover:border-brand-400 hover:text-brand-400 transition-all';
+    btn.textContent = r;
+    btn.onclick = () => {
+      document.getElementById('userInput').value = r;
+      handleUserMessage(new Event('submit'));
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function showTyping() { document.getElementById('typingIndicator').classList.remove('hidden'); }
+function hideTyping() { document.getElementById('typingIndicator').classList.add('hidden'); }
+
+function handleUserMessage(e) {
+  e.preventDefault();
+  if (callState !== 'connected') return;
+  const input = document.getElementById('userInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  document.getElementById('quickReplies').innerHTML = '';
+  conversationContext.messageCount++;
+
+  addTranscriptMessage('user', msg);
+  showTyping();
+
+  const thinkTime = 800 + Math.random() * 1200;
+  setTimeout(() => {
+    hideTyping();
+    if (callState !== 'connected') return;
+    const intents = detectIntent(msg);
+    const response = generateResponse(intents);
+    addTranscriptMessage('agent', response.text);
+    if (!isOnHold) speakSSML(response.text, currentLang);
+    if (response.quickReplies.length > 0) showQuickReplies(response.quickReplies);
+  }, thinkTime);
+}
 
 function initWaveformBars() {
   const userW = document.getElementById('userWaveform');
@@ -1439,7 +1663,6 @@ function initWaveformBars() {
     b1.style.height = '2px';
     userW.appendChild(b1);
     userWaveformBars.push(b1);
-
     const b2 = document.createElement('div');
     b2.className = 'waveform-bar';
     b2.style.height = '2px';
@@ -1452,12 +1675,13 @@ function initWaveformBars() {
 async function initiateCall() {
   if (callState !== 'idle') return;
   callState = 'ringing';
-  scriptIndex = 0;
+  conversationContext = { industry: null, name: null, discussed: [], messageCount: 0, sentiment: 'neutral' };
 
   document.getElementById('callIdle').classList.add('hidden');
   document.getElementById('callRinging').classList.remove('hidden');
   document.getElementById('callConnected').classList.add('hidden');
   document.getElementById('callTranscript').innerHTML = '';
+  document.getElementById('quickReplies').innerHTML = '';
 
   try {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1465,14 +1689,11 @@ async function initiateCall() {
     analyserUser.fftSize = 64;
     analyserAgent = audioCtx.createAnalyser();
     analyserAgent.fftSize = 64;
-
     try {
       micStream = await navigator.mediaDevices.getUserMedia({audio:true});
       const source = audioCtx.createMediaStreamSource(micStream);
       source.connect(analyserUser);
-    } catch(e) {
-      // mic denied — simulate
-    }
+    } catch(e) {}
   } catch(e) {}
 
   setTimeout(() => {
@@ -1483,7 +1704,16 @@ async function initiateCall() {
     initWaveformBars();
     startCallTimer();
     startWaveformAnimation();
-    advanceScript();
+
+    const disclosure = (T[currentLang]?.simDisclosure) || T.en.simDisclosure;
+    addTranscriptMessage('system', disclosure);
+    setTimeout(() => {
+      const greeting = aiKnowledge.greeting[Math.floor(Math.random()*aiKnowledge.greeting.length)];
+      addTranscriptMessage('agent', greeting);
+      if (!isOnHold) speakSSML(greeting, currentLang);
+      showQuickReplies(['Tell me about Voxora', 'Healthcare solutions', 'See pricing', 'How does it work?']);
+      document.getElementById('userInput').focus();
+    }, 1500);
   }, 2000);
 }
 
@@ -1498,48 +1728,19 @@ function startCallTimer() {
 
 function startWaveformAnimation() {
   const userBuf = new Uint8Array(analyserUser ? analyserUser.frequencyBinCount : 32);
-  const agentBuf = new Uint8Array(32);
-
   function animate() {
     if (callState !== 'connected') return;
     if (analyserUser && !isMuted) { analyserUser.getByteFrequencyData(userBuf); }
     else { userBuf.fill(0); }
-
     for (let i = 0; i < 32; i++) {
       const uH = analyserUser && !isMuted ? Math.max(2, (userBuf[i%userBuf.length]/255)*60) : 2;
       userWaveformBars[i].style.height = uH + 'px';
-
       const aH = isOnHold ? 2 : Math.max(2, Math.random()*30 + Math.sin(Date.now()/200+i)*15);
       agentWaveformBars[i].style.height = aH + 'px';
     }
     animFrame = requestAnimationFrame(animate);
   }
   animate();
-}
-
-function advanceScript() {
-  if (scriptIndex >= callScript.length || callState !== 'connected') return;
-  const entry = callScript[scriptIndex];
-  const text = entry.text || (T[currentLang]?.[entry.textKey]) || T.en[entry.textKey] || '';
-  const transcript = document.getElementById('callTranscript');
-
-  setTimeout(() => {
-    if (callState !== 'connected') return;
-    const div = document.createElement('div');
-    div.className = 'glass-card p-2 rounded-lg text-xs';
-    if (entry.role === 'agent') {
-      div.innerHTML = `<span class="text-accent-400 font-semibold">Voxora:</span> ${sanitize(text)}`;
-      if (!isOnHold) speakSSML(text, currentLang);
-    } else {
-      div.innerHTML = `<span class="text-brand-400 font-semibold">You:</span> ${sanitize(text)}`;
-    }
-    transcript.appendChild(div);
-    transcript.scrollTop = transcript.scrollHeight;
-    scriptIndex++;
-    if (scriptIndex < callScript.length) {
-      advanceScript();
-    }
-  }, scriptIndex === 0 ? 500 : 3000 + Math.random()*2000);
 }
 
 function sanitize(str) {
@@ -1572,11 +1773,12 @@ function endCall() {
   if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
   if (audioCtx) { audioCtx.close(); audioCtx = null; }
   isMuted = false; isOnHold = false;
-
   document.getElementById('callIdle').classList.remove('hidden');
   document.getElementById('callRinging').classList.add('hidden');
   document.getElementById('callConnected').classList.add('hidden');
   document.getElementById('callTimer').textContent = '00:00';
+  document.getElementById('quickReplies').innerHTML = '';
+  hideTyping();
 }
 
 document.getElementById('startCallBtn').addEventListener('click', initiateCall);
