@@ -551,13 +551,17 @@ function selectScenario(el){
 // ===== Speech =====
 function speakText(text){
   if(!('speechSynthesis' in window) || isOnHold) return;
+  const wasListening = isRecording;
+  if(wasListening) stopRecording();
   window.speechSynthesis.cancel();
   const utter=new SpeechSynthesisUtterance(text);
   utter.rate=1; utter.pitch=1;
   const voices=window.speechSynthesis.getVoices();
   const preferred=voices.find(v=>v.lang.startsWith('en')&&v.name.includes('Female'))||voices.find(v=>v.lang.startsWith('en'))||voices[0];
   if(preferred) utter.voice=preferred;
-  window.speechSynthesis.speak(utter);
+  utter.onend=()=>{ if(wasListening) toggleMic(); };
+  utter.onerror=()=>{ if(wasListening) toggleMic(); };
+  setTimeout(()=>{ window.speechSynthesis.speak(utter); }, 80);
 }
 
 // ===== Call Timer =====

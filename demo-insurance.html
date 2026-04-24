@@ -529,13 +529,20 @@ function removeTyping(){
 
 /* --- TTS (respects hold) --- */
 function speakText(text){
-  if(!('speechSynthesis' in window)) return;
-  if(isOnHold) return;
+  if(!('speechSynthesis' in window) || isOnHold) return;
+  const wasListening = isRecording;
+  if(wasListening) stopRecording();
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.rate = 1; u.pitch = 1;
-  window.speechSynthesis.speak(u);
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v=>v.lang.startsWith('en')&&v.name.includes('Female'))||voices.find(v=>v.lang.startsWith('en'))||voices[0];
+  if(preferred) u.voice = preferred;
+  u.onend = ()=>{ if(wasListening) micBtn.click(); };
+  u.onerror = ()=>{ if(wasListening) micBtn.click(); };
+  setTimeout(()=>{ window.speechSynthesis.speak(u); }, 80);
 }
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged=()=>{ speechSynthesis.getVoices(); }; speechSynthesis.getVoices(); }
 </script>
 </body>
 </html>

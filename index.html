@@ -1417,13 +1417,17 @@ if ('speechSynthesis' in window) {
 
 function speakSSML(text, langCode) {
   if (!('speechSynthesis' in window)) return;
+  const wasListening = isCallRecording;
+  if (wasListening) stopCallMic();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = langCode || currentLang;
   if (voiceMap[langCode||currentLang]) u.voice = voiceMap[langCode||currentLang];
   u.rate = 0.95;
   u.pitch = 1.05;
-  speechSynthesis.speak(u);
+  u.onend = () => { if (wasListening && callState === 'connected') toggleCallMic(); };
+  u.onerror = () => { if (wasListening && callState === 'connected') toggleCallMic(); };
+  setTimeout(() => { speechSynthesis.speak(u); }, 80);
   return u;
 }
 
